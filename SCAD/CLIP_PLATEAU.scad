@@ -1,5 +1,5 @@
 longueur=30;
-hauteur=15;
+hauteur=10;
 ep=3;
 r_m3=2;
 r_gaine=4;

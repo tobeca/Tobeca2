@@ -5,7 +5,7 @@ r_m3=2;
 ecrou_m3=3.3;
 ep=10;
 dec_trou_serrage=4;
-r_trou_filament=2;
+r_trou_filament=1.8;
 
 module arrondi(RAYON,EP){
 	difference(){
@@ -17,6 +17,15 @@ module arrondi(RAYON,EP){
 		translate([-5,RAYON,-5])cube([RAYON*2+10,RAYON*2+10,EP+10]);
 
 	}
+}
+
+module test(){
+hull(){
+			translate([5,dec_trou_serrage,0]){cylinder(r=8, h=ep/2, $fn=50);}
+			translate([-5,largeur/2-4,0]){cylinder(r=8, h=ep/2, $fn=50);}
+			translate([-5,largeur/2+4,0]){cylinder(r=8, h=ep/2, $fn=50);}
+			translate([5,largeur-dec_trou_serrage,0]){cylinder(r=8, h=ep/2, $fn=50);}
+			}
 }
 
 module support_608zz(){
@@ -34,8 +43,7 @@ module support_608zz(){
 			translate([0,0,ep]){cube([5,largeur,2]);}
 
 			translate([5,dec_trou_serrage,0]){cylinder(r=8, h=ep/2, $fn=50);}
-		translate([5,largeur-dec_trou_serrage,0]){cylinder(r=8, h=ep/2, $fn=50);}
-
+			translate([5,largeur-dec_trou_serrage,0]){cylinder(r=8, h=ep/2, $fn=50);}
 		}
 		//extrusion pour 608ZZ
 		translate([8,11,-5]){cube([24,8,ep+10]);}
@@ -51,19 +59,18 @@ module support_608zz(){
 }
 
 module trous_moteur(){
-		cylinder(r=r_m3+0.25, h=largeur+10, $fn=50);
+		cylinder(r=1.5, h=largeur+10, $fn=50);
 		translate([0,0,0]){cylinder(r=3.5, h=8, $fn=50);}
 
-		translate([31,0,0]){cylinder(r=r_m3+0.25, h=largeur+10, $fn=50);}
+		translate([31,0,0]){cylinder(r=1.5, h=largeur+10, $fn=50);}
 		translate([31,0,0]){cylinder(r=3.5, h=8, $fn=50);}
 }
 
-module flanc_charniere(){
+module flanc_charniere(rayon_trou){
 	difference(){
 		cube([15,11,7]);
 		
-		translate([11,6,-5]){cylinder(r=r_m3, h=15, $fn=50);}
-		translate([11,6,5]){cylinder(r1=r_m3, r2=r_m3+1, h=2, $fn=50);}
+		translate([11,6,-5]){cylinder(r=rayon_trou, h=15, $fn=50);}
 
 		translate([-2,4,-5]){rotate([0,0,30])cube([19,11,15]);}
 	}
@@ -95,33 +102,33 @@ module extrudeur(){
 
 		//extrusions dans partie à fixer sur plaque
 		translate([15,-5,-5]){cube([10,5+3,largeur+10]);}
+		translate([22,-5,-5]){cube([10,5+3,15]);}
 		translate([45,-5,-5]){cube([10,5+3,largeur+10]);}
 		translate([5,-5,largeur/2]){rotate([-90,0,0])cylinder(r=r_m3, h=20, $fn=50);}
 		translate([longueur-5,-5,largeur/2]){rotate([-90,0,0])cylinder(r=r_m3, h=20, $fn=50);}
-		translate([5,10-2.5,largeur/2]){rotate([-90,0,0])cylinder(r=ecrou_m3, h=10, $fn=6);}
-		translate([longueur-5,10-2.5,largeur/2]){rotate([-90,0,0])cylinder(r=ecrou_m3, h=10, $fn=6);}
+		
+		//empreinte M3 pour fixation sur plaque alu
+		translate([5,10-4,largeur/2]){rotate([-90,0,0])cylinder(r=ecrou_m3-0.15, h=10, $fn=6);}
+		translate([longueur-5,10-4,largeur/2]){rotate([-90,0,0])cylinder(r=ecrou_m3-0.15, h=10, $fn=6);}
 
 		//placement de trous pour fixation du moteur
-		translate([40.5,48.5,-5]){rotate([0,0,-45])trous_moteur();}
+		translate([39,48.5,-5]){rotate([0,0,-45])trous_moteur();}
 
+		//trou pour placer l'oeillet
+		translate([longueur/2,49,largeur/2]){rotate([-90,0,0])cylinder(r=2, h=10, $fn=50);}
 		//trou général pour passage du filament
-		
-		translate([longueur/2,4,largeur/2]){rotate([-90,0,0])cylinder(r1=r_trou_filament,r2=r_trou_filament+1, h=22, $fn=50);}
-		translate([longueur/2,25,largeur/2]){rotate([-90,0,0])cylinder(r=r_trou_filament, h=100, $fn=50);}
-		
+		translate([longueur/2,-5,largeur/2]){rotate([-90,0,0])cylinder(r=r_trou_filament, h=100, $fn=50);}
 
 		//trou central
-		translate([40,27,largeur-3]){cylinder(r=12, h=5, $fn=100);}
-		translate([40,27,largeur-6]){cylinder(r1=10,r2=12, h=3, $fn=100);}
-		translate([40,27,largeur-13]){cylinder(r1=6,r2=10, h=7, $fn=100);}
+		translate([39,26.5,largeur-3]){cylinder(r=11, h=5, $fn=100);}
+		translate([39,26.5,largeur-8]){cylinder(r1=10,r2=11, h=5, $fn=100);}
+		translate([39,26.5,largeur-15]){cylinder(r1=6,r2=10, h=7, $fn=100);}
 
 	hull(){
-		translate([40,27,-5]){cylinder(r=6, h=largeur+10, $fn=100);}
-		translate([35,27,-5]){cylinder(r=6, h=largeur+10, $fn=100);}
+		translate([39,26.5,-5]){cylinder(r=6, h=largeur+10, $fn=100);}
+		translate([35,26.5,-5]){cylinder(r=6, h=largeur+10, $fn=100);}
 		}
 
-
-		//translate([20,27-12,-5]){cube([20,12*2,largeur+10]);}
 		translate([20,22,-5]){cube([20,10,largeur+10]);}
 		translate([40-11-3,27,-5]){cylinder(r=12, h=largeur+10, $fn=200);}
 
@@ -147,14 +154,14 @@ module extrudeur(){
 		}
 
 		//extrusion pour ventilation proche trou d'entrée
-		translate([longueur/2+3,-5,0]){rotate([-90,0,0])cylinder(r=largeur/2-r_trou_filament-1, h=9, $fn=200);}
+		translate([longueur/2+3,-5,0]){rotate([-90,0,0])cylinder(r=largeur/2-r_trou_filament-1, h=8, $fn=200);}
 		translate([longueur/2,-5,largeur/2]){rotate([-90,0,0])cylinder(r=5, h=12, $fn=100);}
-		translate([longueur/2,-5,largeur/2]){rotate([-90,0,0])cylinder(r=9, h=9, $fn=100);}
+		translate([longueur/2,-5,largeur/2]){rotate([-90,0,0])cylinder(r=8.5, h=9, $fn=100);}
 		
 	}
 	//ajout des flancs pour la charnière
-	translate([12,4,0]){flanc_charniere();}
-	translate([12,4,largeur-7]){flanc_charniere();}
+	translate([12,4,0]){flanc_charniere(r_m3);}
+	translate([12,4,largeur-7]){flanc_charniere(1.2);}
 }
 
 extrudeur();

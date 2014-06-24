@@ -110,4 +110,4 @@ difference(){
 
 
 }
-translate([0,-14,0]){plaque_led();}
+//translate([0,-14,0]){plaque_led();}

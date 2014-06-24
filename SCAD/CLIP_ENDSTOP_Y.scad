@@ -1,7 +1,7 @@
 r_m3=2;
 hauteur=8;
 long=40;
-larg=20;
+larg=10;
 espace=20;
 
 module clip(){

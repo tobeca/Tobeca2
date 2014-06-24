@@ -136,8 +136,35 @@ class Instructions: #les différentes fonctions d'instructions possibles pour us
 			filout.write('G1 Z'+str(profondeur)+' F'+parametres.liste[3][1]+'\n') #perçage à la profondeur calculée
 			filout.write('G1 F'+parametres.liste[3][1]+'\n') #vitesse de déplacement normale
 			filout.write('G1 Z'+str(h_travail)+' F'+parametres.liste[7][1]+'\n') #remontée du forêt
+
+	def point(self,chaine,nb_var,parametres): #fonction pour pointer une pièce
+		index=0
+		h_travail = float(parametres.liste[0][1])+float(parametres.liste[1][1])+float(parametres.liste[11][1])
+		while index < len(chaine): #on cherche les caractères entourant les valeurs
+			if chaine[index] == "[":
+				nbparouvre=index
+			if chaine[index] == ",":
+				nbvirgule=index
+			if chaine[index] == "]":
+				nbparferme=index
+			index = index+1
+
+		pos_x=variables.calculer(chaine,nb_var,nbparouvre+1,nbvirgule)+float(parametres.liste[5][1])
+		pos_y=variables.calculer(chaine,nb_var,nbvirgule+1,nbparferme)+float(parametres.liste[6][1])
 	
-		
+		filout.write('G1 F'+parametres.liste[2][1]+'\n')
+		filout.write('G1 X'+str(pos_x)+' Y'+str(pos_y)+' F'+parametres.liste[7][1]+'\n')
+	
+		filout.write('G1 F'+parametres.liste[3][1]+'\n') #définition de la vitesse de descente en déplacement rapide
+			
+		affleurement=(float(parametres.liste[4][1]))*float(parametres.liste[0][1])/float(parametres.liste[4][1])+float(parametres.liste[11][1])+1.5
+			
+		filout.write('G1 Z'+str(affleurement)+' F'+parametres.liste[7][1]+'\n') #descente pour affleurer la matière à percer	
+		filout.write('G1 F'+parametres.liste[12][1]+'\n') #définition de la vitesse de descente en centrage
+		zcentrage=float(parametres.liste[0][1])+float(parametres.liste[11][1])+0.5 #calcul de la profondeur de centrage
+		filout.write('G1 Z'+str(zcentrage)+' F'+parametres.liste[12][1]+'\n') #centrage à la profondeur calculée		
+		filout.write('G1 F'+parametres.liste[3][1]+'\n') #vitesse de déplacement normale
+		filout.write('G1 Z'+str(h_travail)+' F'+parametres.liste[7][1]+'\n') #remontée du forêt
 		filout.write('\n')
 	
 	def coupesimple(self,chaine,parametres,nb_var): #fonction de coupe simple multipoint, sans gestion du diamètre de la fraise.
@@ -223,7 +250,7 @@ class Instructions: #les différentes fonctions d'instructions possibles pour us
 		filout.write('\n')
 	
 liste_parametres=['ep_matiere','marge_z','f_deplacement','f_descente','z_passe_percer','off_x','off_y','accel','d_fraise','z_passe_decouper','f_decoupe','off_z','f_centrage']
-#					0			1				2			3				4			5		6		7			8				9				10		11		12
+#			0	1		2		3		4	5	6	7	8		9		10	11		12
 num=0 #nombre de paramètres de base
 parametres=GestionVariables(30,2) #liste des valeurs des paramètres
 nb_var=0 #nombre de variables déclarées dans le fichier
@@ -248,12 +275,13 @@ filout=open(nom+'.gcode', 'w')
 
 #Annotation du fichier GCODE
 filout.write('; Generation GCODE par OpenASCAM - Adrien Grelet - 2013\n')
+
 localtime = time.asctime(time.localtime(time.time()))
 filout.write('; Generation fichier : '+localtime+'\n\n')		
 #remplissage de la variable ligne pour lancer la boucle while
 ligne = "init"
 
-while ligne != "}\n": #première lecture pour stocker les parametres
+while ligne != "}\r\n": #première lecture pour stocker les parametres
 	ligne = filin.readline()
 	lignenette=''.join(ligne.split()) #nettoyage des espaces et tabulations de la ligne, pour vérifier si le premier char est un #, indiquant un commentaire.
 	if "=" in ligne and not "#" in lignenette[0]: #si c'est une ligne de paramètres
@@ -267,7 +295,7 @@ instruction.startwrite(parametres)
 
 ligne = filin.readline() #lecture de la ligne suivante pour que la condition du while ci dessous soit validée.
 
-while ligne != "}\n": #lecture pour stocker les variables
+while ligne != "}\r\n": #lecture pour stocker les variables
 	ligne = filin.readline()
 	lignenette=''.join(ligne.split()) #nettoyage des espaces et tabulations de la ligne, pour vérifier si le premier char est un #, indiquant un commentaire.
 	if "=" in ligne and not "#" in lignenette[0]: #si c'est une ligne de variables
@@ -281,6 +309,8 @@ while ligne != "": #lecture pour faire les instructions
 	lignenette=''.join(ligne.split()) #nettoyage des espaces et tabulations de la ligne, pour vérifier si le premier char est un #, indiquant un commentaire.
 	if "trou" in ligne and not "#" in lignenette[0]: #si c'est une instruction de perçage
 		instruction.trou(lignenette,nb_var,parametres)
+	if "point" in ligne and not "#" in lignenette[0]: #si c'est une instruction de perçage
+		instruction.point(lignenette,nb_var,parametres)
 	if "coupesimple" in ligne and not "#" in lignenette[0]: #si c'est une instruction d'usinage
 		instruction.coupesimple(lignenette,parametres,nb_var)
 	if "coupedroite" in ligne and not "#" in lignenette[0]: #si c'est une instruction de coupe droite
