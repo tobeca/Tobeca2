@@ -1,4 +1,4 @@
-longueur=125;
+longueur=130;
 largeur=95;
 hauteur=43;
 epaisseur_mur=2;

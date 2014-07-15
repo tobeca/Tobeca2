@@ -28,9 +28,9 @@ INSTRUCTIONS{
 	#Positionnement des points de perçage percer, la première valeur est en X et la seconde est en Y.
 	
 	#Montée en Y
-	trou([d_bord,16]);
+	trou([d_bord,20]);
 	trou([d_bord,65]);
-	trou([d_bord,101]);
+	trou([d_bord,105]);
 	trou([d_bord,150]);
 	trou([d_bord,190]);
 	trou([d_bord,225]);
@@ -43,19 +43,19 @@ INSTRUCTIONS{
 	trou([longueur-d_bord,225]);
 	trou([longueur-d_bord,190]);
 	trou([longueur-d_bord,150]);
-	trou([longueur-d_bord,101]);
+	trou([longueur-d_bord,105]);
 	trou([longueur-d_bord,93]);
 	trou([longueur-d_bord,65]);
-	trou([longueur-d_bord,16]);
+	trou([longueur-d_bord,20]);
 	trou([longueur-d_bord,8]);
 	
 	#Trous côté chassis bas
-	trou([254.5,80]);
-	trou([199.5,80]);
+	trou([254.5,70]);
+	trou([199.5,70]);
 	
 	#Trous côté chassis haut
-	trou([199.5,165]);
-	trou([254.5,165]);
+	trou([199.5,155]);
+	trou([254.5,155]);
 	
 	#Trous pour poignée
 	trou([326.5,190]);

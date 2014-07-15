@@ -39,7 +39,7 @@ module retour_y(){
 
 		//trou d'axe
 		translate([dec_y,largeur/2,-5]){ cylinder(h=hauteur*2, r=r_m3, $fn=50);}
-		translate([dec_y,largeur/2,-0.01]){ cylinder(h=2, r1=3.5, r2=r_m3, $fn=50);}
+		translate([dec_y,largeur/2,-0.01]){ cylinder(h=3.5, r=3, $fn=50);}
 
 		
 	}

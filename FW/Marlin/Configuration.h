@@ -94,7 +94,7 @@
 
 //use RepRapPro Algebraic Temperature calculation rather than
 //the tables - still experimental in this version of Marlin.
-#define ALGEBRA_TEMP 
+//#define ALGEBRA_TEMP 
 
 #ifdef ALGEBRA_TEMP
 #define ABS_ZERO -273.15
@@ -281,7 +281,7 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 // Disables axis when it's not being used.
 #define DISABLE_X false
 #define DISABLE_Y false
-#define DISABLE_Z true
+#define DISABLE_Z false
 #define DISABLE_E false // For all extruders
 
 #define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true

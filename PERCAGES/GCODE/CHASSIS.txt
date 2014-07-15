@@ -33,13 +33,13 @@ INSTRUCTIONS{
 	trou([198.5,44.5]);
 	
 	#Trous de fixation du boitier électronique
-	trou([190,82.5]);
-	trou([238,163.5]);
+	trou([190,87.5]);
+	trou([238,168.5]);
 
 	#Trous de fixation de l'alimentation électrique
 	trou([234,248]);
 	trou([194,248]);
 	trou([234,403]);
-	trou([234,403]);
+	trou([194,403]);
 	
 }

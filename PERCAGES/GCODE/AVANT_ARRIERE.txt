@@ -22,49 +22,50 @@ VARIABLES{
 	#Emplacement pour gérer directement des variables dans les instructions
 	hauteur=85;
 	longueur=396;
+	dec_grenouille=0.75;
 }
 
 INSTRUCTIONS{
 	#Positionnement des points de perçage percer, la première valeur est en X et la seconde est en Y.
 	#Fermeture grenouille gauche
-	trou([41,35]);
-	trou([57.5,75]);
-	trou([24.5,75]);
+	trou([41,35-dec_grenouille]);
+	trou([57.5,75-dec_grenouille]);
+	trou([24.5,75-dec_grenouille]);
 	
 	#Fermeture grenouille gauche
-	trou([41,120]);
-	trou([57.5,160]);
-	trou([24.5,160]);
+	trou([41,120-dec_grenouille]);
+	trou([57.5,160-dec_grenouille]);
+	trou([24.5,160-dec_grenouille]);
 	
 	#Fermeture grenouille gauche
-	trou([41,213]);
-	trou([57.5,231]);
-	trou([24.5,231]);
+	trou([41,213-dec_grenouille]);
+	trou([57.5,231-dec_grenouille]);
+	trou([24.5,231-dec_grenouille]);
 	
 	#Fermeture grenouille gauche
-	trou([41,284]);
-	trou([57.5,302]);
-	trou([24.5,302]);
+	trou([41,284-dec_grenouille]);
+	trou([57.5,302-dec_grenouille]);
+	trou([24.5,302-dec_grenouille]);
 	
 	#Fermeture grenouille droite
-	trou([longueur-57.5,302]);
-	trou([longueur-24.5,302]);
-	trou([longueur-41,284]);
+	trou([longueur-57.5,302-dec_grenouille]);
+	trou([longueur-24.5,302-dec_grenouille]);
+	trou([longueur-41,284-dec_grenouille]);
 	
 	#Fermeture grenouille droite
-	trou([longueur-57.5,231]);
-	trou([longueur-24.5,231]);
-	trou([longueur-41,213]);
+	trou([longueur-57.5,231-dec_grenouille]);
+	trou([longueur-24.5,231-dec_grenouille]);
+	trou([longueur-41,213-dec_grenouille]);
 	
 	#Fermeture grenouille droite
-	trou([longueur-57.5,160]);
-	trou([longueur-24.5,160]);
-	trou([longueur-41,120]);
+	trou([longueur-57.5,160-dec_grenouille]);
+	trou([longueur-24.5,160-dec_grenouille]);
+	trou([longueur-41,120-dec_grenouille]);
 	
 	#Fermeture grenouille droite
-	trou([longueur-57.5,75]);
-	trou([longueur-24.5,75]);
-	trou([longueur-41,35]);
+	trou([longueur-57.5,75-dec_grenouille]);
+	trou([longueur-24.5,75-dec_grenouille]);
+	trou([longueur-41,35-dec_grenouille]);
 	
 	#Trous pour fixer les arbres de guidage Y arriere droite
 	trou([291,35]);

@@ -19,14 +19,7 @@ module arrondi(RAYON,EP){
 	}
 }
 
-module test(){
-hull(){
-			translate([5,dec_trou_serrage,0]){cylinder(r=8, h=ep/2, $fn=50);}
-			translate([-5,largeur/2-4,0]){cylinder(r=8, h=ep/2, $fn=50);}
-			translate([-5,largeur/2+4,0]){cylinder(r=8, h=ep/2, $fn=50);}
-			translate([5,largeur-dec_trou_serrage,0]){cylinder(r=8, h=ep/2, $fn=50);}
-			}
-}
+
 
 module support_608zz(){
 	difference(){
@@ -59,10 +52,10 @@ module support_608zz(){
 }
 
 module trous_moteur(){
-		cylinder(r=1.5, h=largeur+10, $fn=50);
+		cylinder(r=1.7, h=largeur+10, $fn=50);
 		translate([0,0,0]){cylinder(r=3.5, h=8, $fn=50);}
 
-		translate([31,0,0]){cylinder(r=1.5, h=largeur+10, $fn=50);}
+		translate([31,0,0]){cylinder(r=1.7, h=largeur+10, $fn=50);}
 		translate([31,0,0]){cylinder(r=3.5, h=8, $fn=50);}
 }
 
@@ -116,8 +109,10 @@ module extrudeur(){
 
 		//trou pour placer l'oeillet
 		translate([longueur/2,49,largeur/2]){rotate([-90,0,0])cylinder(r=2, h=10, $fn=50);}
+
 		//trou général pour passage du filament
 		translate([longueur/2,-5,largeur/2]){rotate([-90,0,0])cylinder(r=r_trou_filament, h=100, $fn=50);}
+		translate([longueur/2,15,largeur/2]){rotate([-90,0,30])cylinder(r=r_trou_filament, h=10, $fn=50);}
 
 		//trou central
 		translate([39,26.5,largeur-3]){cylinder(r=11, h=5, $fn=100);}

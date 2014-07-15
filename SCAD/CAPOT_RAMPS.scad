@@ -1,4 +1,4 @@
-longueur=128; //117 pour v1
+longueur=133; //117 pour v1
 largeur=95; //86 pour v1
 ep=2;
 r_pointe=6;

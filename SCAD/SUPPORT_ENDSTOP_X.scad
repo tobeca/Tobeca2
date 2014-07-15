@@ -1,4 +1,4 @@
-height=17;
+height=20;
 long=14;
 larg=21.5;
 r_arbre=4.2;
@@ -22,7 +22,7 @@ module endstop_x(){
 
 		//trou pour serrage arbre avec vis
 		translate([long/2,larg/2-0.5,4]){rotate([-90,0,0])cylinder(r=r_m3, h=15, $fn=50);}
-		translate([long/2,-0.5,4]){rotate([-90,0,0])cylinder(r=1.2, h=larg/2+1, $fn=50);}
+		translate([long/2,-0.5,4]){rotate([-90,0,0])cylinder(r=1.35, h=larg/2+1, $fn=50);}
 
 		
 	}
