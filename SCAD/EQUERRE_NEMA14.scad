@@ -29,6 +29,9 @@ module equerre(){
 			translate([-5,(nema+ep*2)/2+10,hauteur/2+ep/2+2]){rotate([0,90,0])cylinder(h = 15, r = r_m3, $fn=50);}
 		}
 
+		//trou traversant pour fixer faisceau de câbles
+		translate([10,-5,hauteur/2]){rotate([-90,0,0])cylinder(h = 100, r = r_m3, $fn=50);}
+
 	}
 }
 

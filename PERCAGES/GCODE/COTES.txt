@@ -50,12 +50,12 @@ INSTRUCTIONS{
 	trou([longueur-d_bord,8]);
 	
 	#Trous côté chassis bas
-	trou([254.5,70]);
-	trou([199.5,70]);
+	trou([254.5,69]);
+	trou([199.5,69]);
 	
 	#Trous côté chassis haut
-	trou([199.5,155]);
-	trou([254.5,155]);
+	trou([199.5,154]);
+	trou([254.5,154]);
 	
 	#Trous pour poignée
 	trou([326.5,190]);
