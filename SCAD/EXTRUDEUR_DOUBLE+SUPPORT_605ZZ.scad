@@ -92,9 +92,19 @@ module double_extrudeur(){
 
 		//trous traversants pour serrer les ressorts
 		translate([-5,10+44.55/2-15+5,6]){rotate([0,90,0])cylinder(r=r_m5, h=100, $fn=50);}
+		translate([-5,10+44.55/2-15+5,6]){rotate([0,90,0])cylinder(r=r_m5+0.5, h=44, $fn=50);}
+		
+
 		translate([-5,10+44.55/2-15+5,ep-6]){rotate([0,90,0])cylinder(r=r_m5, h=100, $fn=50);}
+		translate([31,10+44.55/2-15+5,ep-6]){rotate([0,90,0])cylinder(r=r_m5+0.5, h=100, $fn=50);}
+		
+
 		translate([-5,10+44.55/2-15+long_605-5,6]){rotate([0,90,0])cylinder(r=r_m5, h=100, $fn=50);}
+		translate([-5,10+44.55/2-15+long_605-5,6]){rotate([0,90,0])cylinder(r=r_m5+0.5, h=40, $fn=50);}
+		
+
 		translate([-5,10+44.55/2-15+long_605-5,ep-6]){rotate([0,90,0])cylinder(r=r_m5, h=100, $fn=50);}
+		translate([31,10+44.55/2-15+long_605-5,ep-6]){rotate([0,90,0])cylinder(r=r_m5+0.5, h=100, $fn=50);}
 
 		//extrusions pour alléger les côtés de la pièce
 		hull(){
@@ -134,10 +144,10 @@ module support_605(){
 		translate([ep-4,0,ep_605-3]){cube([10,30,5]);}
 
 		//trous pour serrage
-		translate([6,5,-5]){cylinder(r=3, h=ep+10, $fn=50);}
-		translate([ep-6,5,-5]){cylinder(r=3, h=ep+10, $fn=50);}
-		translate([6,long_605-5,-5]){cylinder(r=3, h=ep+10, $fn=50);}
-		translate([ep-6,long_605-5,-5]){cylinder(r=3, h=ep+10, $fn=50);}
+		translate([6,5,-5]){cylinder(r=3.3, h=ep+10, $fn=50);}
+		translate([ep-6,5,-5]){cylinder(r=3.3, h=ep+10, $fn=50);}
+		translate([6,long_605-5,-5]){cylinder(r=3.3, h=ep+10, $fn=50);}
+		translate([ep-6,long_605-5,-5]){cylinder(r=3.3, h=ep+10, $fn=50);}
 
 		//rognage sur les bords pour ne pas frotter sur les blocs moteurs
 		translate([-1,-5,-5]){cube([2,long_605+10,ep_605+10]);}
@@ -148,8 +158,8 @@ module support_605(){
 }
 
 
-double_extrudeur();
+//double_extrudeur();
 //translate([-0,10+44.55/2-15,ep]){rotate([0,90,0])support_605();}
 //translate([largeur,10+44.55/2-15,0]){rotate([0,-90,0])support_605();}
 
-//support_605();
+support_605();

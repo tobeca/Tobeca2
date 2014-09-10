@@ -27,5 +27,12 @@ module sanguinololu_top(){
 		translate([longueur-r_pointe-ep*4,largeur-r_pointe-ep,-5]){goutte();}
 		translate([(longueur+ep*2)/2,(largeur+ep*2)/2,-5]){goutte();}
 	}
+
+	//ajout de boules pour le serrage
+	translate([5,1.5,2.5]){sphere(1.5, $fa=5, $fs=0.1); }	
+	translate([longueur-5,1.5,2.5]){sphere(1.5, $fa=5, $fs=0.1); }
+	translate([5,largeur+2.5,2.5]){sphere(1.5, $fa=5, $fs=0.1); }	
+	translate([longueur-5,largeur+2.5,2.5]){sphere(1.5, $fa=5, $fs=0.1); }
+	
 }
 sanguinololu_top();
