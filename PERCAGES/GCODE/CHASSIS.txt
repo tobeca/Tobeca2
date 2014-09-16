@@ -27,10 +27,10 @@ VARIABLES{
 
 INSTRUCTIONS{
 	#Trous de fixation du moteur
-	trou([198.5,13.5]);
-	trou([229.5,13.5]);
-	trou([229.5,44.5]);
-	trou([198.5,44.5]);
+	trou([198.5,14]);
+	trou([229.5,14]);
+	trou([229.5,45]);
+	trou([198.5,45]);
 	
 	#Trous de fixation du boitier électronique
 	trou([190,87.5]);

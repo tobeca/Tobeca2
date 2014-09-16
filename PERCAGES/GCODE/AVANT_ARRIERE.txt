@@ -22,7 +22,7 @@ VARIABLES{
 	#Emplacement pour gérer directement des variables dans les instructions
 	hauteur=85;
 	longueur=396;
-	dec_grenouille=0.75;
+	dec_grenouille=0.5;
 }
 
 INSTRUCTIONS{
