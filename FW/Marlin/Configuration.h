@@ -175,9 +175,9 @@
 
 // If you are using a preconfigured hotend then you can use one of the value sets by uncommenting it
 // Ultimaker
-    #define  DEFAULT_Kp 22.2
-    #define  DEFAULT_Ki 1.08  
-    #define  DEFAULT_Kd 114  
+    #define  DEFAULT_Kp 37.77 //22.2
+    #define  DEFAULT_Ki 3.58  //1.08
+    #define  DEFAULT_Kd 99.63  //114
 
 // Makergear
 //    #define  DEFAULT_Kp 7.0
@@ -213,9 +213,9 @@
 #ifdef PIDTEMPBED
 //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
 //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, argressive factor of .15 (vs .1, 1, 10)
-    #define  DEFAULT_bedKp 10.00
-    #define  DEFAULT_bedKi .023
-    #define  DEFAULT_bedKd 305.4
+    #define  DEFAULT_bedKp 343.82 //10.00
+    #define  DEFAULT_bedKi 63.98 //0.023
+    #define  DEFAULT_bedKd 461.93 //305.4
 
 //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
 //from pidautotune
@@ -322,7 +322,7 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 
 //// MOVEMENT SETTINGS
 #define NUM_AXIS 4 // The axis order in all axis related arrays is X, Y, Z, E
-#define HOMING_FEEDRATE {5000, 5000, 200, 0}  // set the homing speeds (mm/min)
+#define HOMING_FEEDRATE {6000, 6000, 250, 0}  // set the homing speeds (mm/min)
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

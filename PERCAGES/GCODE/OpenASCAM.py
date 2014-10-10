@@ -8,8 +8,6 @@ import time
 import operator
 import math
 
-#import ModuleFraisage
-
  
 class GestionVariables: #Classe permettant la gestion des variables et des paramètres définis dans le code à compiler
 	def __init__(self,lignes,colonnes):
@@ -137,117 +135,63 @@ class Instructions: #les différentes fonctions d'instructions possibles pour us
 			filout.write('G1 F'+parametres.liste[3][1]+'\n') #vitesse de déplacement normale
 			filout.write('G1 Z'+str(h_travail)+' F'+parametres.liste[7][1]+'\n') #remontée du forêt
 
-	def point(self,chaine,nb_var,parametres): #fonction pour pointer une pièce
+	def rectangle(self,chaine,nb_var,parametres): #fonction pour couper un rectangle
 		index=0
+		tokvir1=0
+		tokvir2=0
+		tokvir3=0
 		h_travail = float(parametres.liste[0][1])+float(parametres.liste[1][1])+float(parametres.liste[11][1])
+		r_fraise = float(parametres.liste[8][1])/2
+
 		while index < len(chaine): #on cherche les caractères entourant les valeurs
 			if chaine[index] == "[":
 				nbparouvre=index
-			if chaine[index] == ",":
-				nbvirgule=index
+			if chaine[index] == "," and tokvir1==0:
+				nbvirgule1=index
+				tokvir1=1
+				index = index+1
+			if chaine[index] == "," and tokvir2==0:
+				nbvirgule2=index
+				tokvir2=1
+				index = index+1
+			if chaine[index] == "," and tokvir3==0:
+				nbvirgule3=index
+				tokvir3=1
+				index = index+1
 			if chaine[index] == "]":
 				nbparferme=index
 			index = index+1
 
-		pos_x=variables.calculer(chaine,nb_var,nbparouvre+1,nbvirgule)+float(parametres.liste[5][1])
-		pos_y=variables.calculer(chaine,nb_var,nbvirgule+1,nbparferme)+float(parametres.liste[6][1])
-	
+		#print("nbvigule1 :",nbvirgule1)
+		#print("nbvigule2 :",nbvirgule2)
+		#print("nbvigule3 :",nbvirgule3)
+
+		pos_x1=variables.calculer(chaine,nb_var,nbparouvre+1,nbvirgule1)+float(parametres.liste[5][1])+r_fraise #coordonnée X du point bas gauche du rectangle
+		pos_y1=variables.calculer(chaine,nb_var,nbvirgule1+1,nbvirgule2)+float(parametres.liste[6][1])+r_fraise #coordonnée Y du point bas gauche du rectangle
+		pos_x2=variables.calculer(chaine,nb_var,nbvirgule2+1,nbvirgule3)+float(parametres.liste[5][1])-r_fraise #coordonnée X du point bas droite du rectangle
+		pos_y2=variables.calculer(chaine,nb_var,nbvirgule3+1,nbparferme)+float(parametres.liste[6][1])-r_fraise #coordonnée Y du point haut droite du rectangle
+
 		filout.write('G1 F'+parametres.liste[2][1]+'\n')
-		filout.write('G1 X'+str(pos_x)+' Y'+str(pos_y)+' F'+parametres.liste[7][1]+'\n')
-	
-		filout.write('G1 F'+parametres.liste[3][1]+'\n') #définition de la vitesse de descente en déplacement rapide
+		filout.write('G1 X'+str(pos_x1)+' Y'+str(pos_y1)+' F'+parametres.liste[7][1]+'\n')
+
+		filout.write('G1 F'+parametres.liste[3][1]+'\n') #définition de la vitesse de descente en déplacement rapide	
+		affleurement=float(parametres.liste[0][1])+float(parametres.liste[11][1])+1.5
+		filout.write('G1 Z'+str(affleurement)+' F'+parametres.liste[7][1]+'\n') #descente pour affleurer la matière à percer
 			
-		affleurement=(float(parametres.liste[4][1]))*float(parametres.liste[0][1])/float(parametres.liste[4][1])+float(parametres.liste[11][1])+1.5
+		filout.write('G1 F'+parametres.liste[10][1]+'\n') #définition de la vitesse de descente en usinage
 			
-		filout.write('G1 Z'+str(affleurement)+' F'+parametres.liste[7][1]+'\n') #descente pour affleurer la matière à percer	
-		filout.write('G1 F'+parametres.liste[12][1]+'\n') #définition de la vitesse de descente en centrage
-		zcentrage=float(parametres.liste[0][1])+float(parametres.liste[11][1])+0.5 #calcul de la profondeur de centrage
-		filout.write('G1 Z'+str(zcentrage)+' F'+parametres.liste[12][1]+'\n') #centrage à la profondeur calculée		
-		filout.write('G1 F'+parametres.liste[3][1]+'\n') #vitesse de déplacement normale
+		profondeur=float(parametres.liste[11][1]) #calcul de la profondeur à usiner
+		filout.write('G1 Z'+str(profondeur)+' F'+parametres.liste[3][1]+'\n') #perçage à la profondeur calculée
+		
+		filout.write('G1 F'+parametres.liste[10][1]+'\n') #vitesse de déplacement en usinage
+		filout.write('G1 X'+str(pos_x1)+' Y'+str(pos_y2)+' F'+parametres.liste[7][1]+'\n') #on usine jusqu'au point d'après
+		filout.write('G1 X'+str(pos_x2)+' Y'+str(pos_y2)+' F'+parametres.liste[7][1]+'\n') #on usine jusqu'au point d'après
+		filout.write('G1 X'+str(pos_x2)+' Y'+str(pos_y1)+' F'+parametres.liste[7][1]+'\n') #on usine jusqu'au point d'après
+		filout.write('G1 X'+str(pos_x1)+' Y'+str(pos_y1)+' F'+parametres.liste[7][1]+'\n') #on revient au point initial
+
 		filout.write('G1 Z'+str(h_travail)+' F'+parametres.liste[7][1]+'\n') #remontée du forêt
-		filout.write('\n')
-	
-	def coupesimple(self,chaine,parametres,nb_var): #fonction de coupe simple multipoint, sans gestion du diamètre de la fraise.
-		index=0
-		tokfin=0
-		nbpoints=0
-		pos_x=[None] * 30 #liste des valeurs des points x
-		pos_y=[None] * 30 #liste des valeurs des points y
-		while index < len(chaine): #on cherche les caractères entourant les valeurs
-			if chaine[index] == "[":
-				nbparouvre=index
-			if chaine[index] == ",":
-				nbvirgule=index
-			if chaine[index] == "]":
-				nbparferme=index
-				tokfin=1
-			index = index+1
-		
-			if tokfin == 1: #si on est à la fin d'un couple x et y
-				pos_x[nbpoints]=variables.calculer(chaine,nb_var,nbparouvre+1,nbvirgule)
-				pos_y[nbpoints]=variables.calculer(chaine,nb_var,nbvirgule+1,nbparferme)
-				nbpoints+=1
-				tokfin=0
-			
-		filout.write('G1 F'+parametres.liste[2][1]+'\n') #vitesse de déplacement normale
-		filout.write('G1 X'+str(pos_x[0])+' Y'+str(pos_y[0])+' F'+parametres.liste[7][1]+'\n') #placement sur le point de départ
-		affleurement=float(parametres.liste[1][1])
-		filout.write('G1 Z-'+str(affleurement)+' F'+parametres.liste[7][1]+'\n') #descente pour affleurer la matière à percer
-		filout.write('G1 F'+parametres.liste[10][1]+'\n') #définition de la vitesse de descente en découpe
-	
-		for p in range(1,int(parametres.liste[9][1])+1): #boucle des passes
-			profondeur=p*float(parametres.liste[0][1])/float(parametres.liste[9][1])+float(parametres.liste[1][1]) #calcul de la profondeur à découper, en fonction du nombre de passe
-			filout.write('G1 Z-'+str(profondeur)+'\n') #descente à la profondeur calculée, découpe commencée
-			for i in range(1,nbpoints): #boucle des points
-				filout.write('G1 X'+str(pos_x[i])+' Y'+str(pos_y[i])+'\n') #découpe jusqu'au point suivant
-			filout.write('G1 X'+str(pos_x[0])+' Y'+str(pos_y[0])+'\n') #placement sur le point de départ
-				
-		filout.write('G1 F'+parametres.liste[2][1]+'\n') #vitesse de déplacement normale
-		filout.write('G1 Z0'+' F'+parametres.liste[7][1]+'\n') #remontée finale de la fraise
-		filout.write('\n')
-	
-	def coupedroite(self,chaine,parametres,nb_var): #fonction de coupe droite simple, sans considération du diamètre de la fraise.
-		index=0
-		tokfin=0
-		nbpoints=0
-		pos_x=[None] * 2 #liste des valeurs des points x
-		pos_y=[None] * 2 #liste des valeurs des points y
-		while index < len(chaine): #on cherche les caractères entourant les valeurs
-			if chaine[index] == "[":
-				nbparouvre=index
-			if chaine[index] == ",":
-				nbvirgule=index
-			if chaine[index] == "]":
-				nbparferme=index
-				tokfin=1
-			index = index+1
-		
-			if tokfin == 1: #si on est à la fin d'un couple x et y
-				pos_x[nbpoints]=variables.calculer(chaine,nb_var,nbparouvre+1,nbvirgule)
-				pos_y[nbpoints]=variables.calculer(chaine,nb_var,nbvirgule+1,nbparferme)
-				nbpoints+=1
-				tokfin=0
-			
-		filout.write('G1 F'+parametres.liste[2][1]+'\n') #vitesse de déplacement normale
-		filout.write('G1 X'+str(pos_x[0])+' Y'+str(pos_y[0])+' F'+parametres.liste[7][1]+'\n') #placement sur le point de départ
-		affleurement=float(parametres.liste[1][1])
-		filout.write('G1 Z-'+str(affleurement)+' F'+parametres.liste[7][1]+'\n') #descente pour affleurer la matière à percer
-		filout.write('G1 F'+parametres.liste[10][1]+'\n') #définition de la vitesse de descente en découpe
-		sens=0
-	
-		for p in range(1,int(parametres.liste[9][1])+1): #boucle des passes
-			profondeur=p*float(parametres.liste[0][1])/float(parametres.liste[9][1])+float(parametres.liste[1][1]) #calcul de la profondeur à découper, en fonction du nombre de passe
-			filout.write('G1 Z-'+str(profondeur)+'\n') #descente à la profondeur calculée, découpe commencée
-			if sens==1:
-				filout.write('G1 X'+str(pos_x[0])+' Y'+str(pos_y[0])+'\n') #retour au point de départ
-				sens=0
-			else:
-				filout.write('G1 X'+str(pos_x[1])+' Y'+str(pos_y[1])+'\n') #découpe jusqu'au point suivant
-				sens=1
-			
-		filout.write('G1 F'+parametres.liste[2][1]+'\n') #vitesse de déplacement normale
-		filout.write('G1 Z0'+' F'+parametres.liste[7][1]+'\n') #remontée finale de la fraise
-		filout.write('\n')
+
+
 	
 liste_parametres=['ep_matiere','marge_z','f_deplacement','f_descente','z_passe_percer','off_x','off_y','accel','d_fraise','z_passe_decouper','f_decoupe','off_z','f_centrage']
 #			0	1		2		3		4	5	6	7	8		9		10	11		12
@@ -309,15 +253,8 @@ while ligne != "": #lecture pour faire les instructions
 	lignenette=''.join(ligne.split()) #nettoyage des espaces et tabulations de la ligne, pour vérifier si le premier char est un #, indiquant un commentaire.
 	if "trou" in ligne and not "#" in lignenette[0]: #si c'est une instruction de perçage
 		instruction.trou(lignenette,nb_var,parametres)
-	if "point" in ligne and not "#" in lignenette[0]: #si c'est une instruction de perçage
-		instruction.point(lignenette,nb_var,parametres)
-	if "coupesimple" in ligne and not "#" in lignenette[0]: #si c'est une instruction d'usinage
-		instruction.coupesimple(lignenette,parametres,nb_var)
-	if "coupedroite" in ligne and not "#" in lignenette[0]: #si c'est une instruction de coupe droite
-		instruction.coupedroite(lignenette,parametres,nb_var)
-
-# Exemple d'utilisation du fichier ModuleFraisage.py :
-# poly = ModuleFraisage.Polygone2D()
+	if "rectangle" in ligne and not "#" in lignenette[0]: #si c'est une instruction de découpe de rectangle
+		instruction.rectangle(lignenette,nb_var,parametres)
 		
 #######FIN DU FICHIER#######
 filout.write('M42 P7 S0 ; on arrête la fraise\n') ########A VERIFIER SUR QUEL PIN ET COMMENT FAIRE CONTACT

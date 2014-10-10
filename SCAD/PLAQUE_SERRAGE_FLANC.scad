@@ -3,7 +3,7 @@ r_tete=3.5;
 r_trou=1.5;
 ep=4;
 r_ext=5;
-ecart=55;
+ecart=92;
 esp_fix=8;
 r_rondelle=4;
 

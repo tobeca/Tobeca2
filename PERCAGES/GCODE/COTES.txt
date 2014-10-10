@@ -9,7 +9,7 @@ PARAMETRES{
 	f_descente=500; #vitesse du descente du forêt en mm/min
 	z_passe_percer=1; #nombre de passes pour perçage
 	off_x=3.5; #offset initial en X
-	off_y=-1; #offset initial en Y
+	off_y=-1.5; #offset initial en Y
 	accel=3000; #acceleration sur les déplacements
 	d_fraise=3; #diamètre de la fraise
 	z_passe_decouper=3; #nombre de passes pour l'usinage
@@ -50,12 +50,12 @@ INSTRUCTIONS{
 	trou([longueur-d_bord,8]);
 	
 	#Trous côté chassis bas
-	trou([254.5,69]);
-	trou([199.5,69]);
+	trou([273,44]);
+	trou([181,44]);
 	
 	#Trous côté chassis haut
-	trou([199.5,154]);
-	trou([254.5,154]);
+	trou([181,129]);
+	trou([273,129]);
 	
 	#Trous pour poignée
 	trou([326.5,190]);
