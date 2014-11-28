@@ -1,6 +1,6 @@
 r_ecrou_m3=3.3;
 l_gorge_collier=1;
-r_douille=8;
+r_douille=7.5;
 r_trou_m3=2;
 r_vis=1.4;
 
@@ -33,8 +33,8 @@ difference(){
 	translate([63,1,0]){cube([ 4, 16, l_gorge_collier*3 ]);}
 
 	//cylindre pour passage douilles
-	translate([-1,9,14]){
-		rotate([0,90,0])cylinder(h = 80, r = r_douille+0.3, $fn=100);
+	translate([-1,9,13]){
+		rotate([0,90,0])cylinder(h = 80, r = r_douille, $fn=100);
 	}
 
 	//cylindres pour trous vis
