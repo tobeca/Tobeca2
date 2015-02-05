@@ -217,6 +217,8 @@ nom=fichier[0:nbpoint]
 #création du fichier de résultat gcode généré
 filout=open(nom+'.gcode', 'w')
 
+print "Fichier GCODE cree"
+
 #Annotation du fichier GCODE
 filout.write('; Generation GCODE par OpenASCAM - Adrien Grelet - 2013\n')
 
@@ -225,11 +227,15 @@ filout.write('; Generation fichier : '+localtime+'\n\n')
 #remplissage de la variable ligne pour lancer la boucle while
 ligne = "init"
 
-while ligne != "}\r\n": #première lecture pour stocker les parametres
+print "Debut de lecture des parametres"
+
+while ligne != "stop": #première lecture pour stocker les parametres
 	ligne = filin.readline()
 	lignenette=''.join(ligne.split()) #nettoyage des espaces et tabulations de la ligne, pour vérifier si le premier char est un #, indiquant un commentaire.
 	if "=" in ligne and not "#" in lignenette[0]: #si c'est une ligne de paramètres
 		num=parametres.recherche(lignenette,liste_parametres,num)
+	if "}" in ligne:
+		ligne = "stop"
 
 filout.write('\n')
 	
@@ -238,12 +244,14 @@ instruction = Instructions()
 instruction.startwrite(parametres)
 
 ligne = filin.readline() #lecture de la ligne suivante pour que la condition du while ci dessous soit validée.
-
-while ligne != "}\r\n": #lecture pour stocker les variables
+#}\r\n
+while ligne != "stop": #lecture pour stocker les variables
 	ligne = filin.readline()
 	lignenette=''.join(ligne.split()) #nettoyage des espaces et tabulations de la ligne, pour vérifier si le premier char est un #, indiquant un commentaire.
 	if "=" in ligne and not "#" in lignenette[0]: #si c'est une ligne de variables
 		variables.stockage(lignenette)
+	if "}" in ligne:
+		ligne = "stop"
 		
 #ensuite il faut trier la liste variables par le nombre de caractères constituant l'entrée de façon décroissante.
 variables.trier(nb_var)

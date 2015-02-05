@@ -51,7 +51,7 @@ INSTRUCTIONS{
 	trou([180+x_dou/2,159]);
 	
 	#Trous pour vis de maintien courroie
-	trou([122,110]);
+	trou([115,110]);
 	trou([115,100]);
 
 	#Trous SC10UU droite bas

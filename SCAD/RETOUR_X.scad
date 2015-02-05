@@ -30,7 +30,7 @@ module retour_x(){
 		translate([5.5,5.5,-5]){cylinder(r=r_m3, h=15, $fn=50);}
 		translate([5.5,l-5.5,-5]){cylinder(r=r_m3, h=15, $fn=50);}
 		
-		translate([l/2-7,l/2,-5]){cylinder(r=r_m3, h=50, $fn=50);}
+		translate([l/2-7,l/2,-5]){cylinder(r=r_m3-0.3, h=50, $fn=50);}
 
 		
 	}

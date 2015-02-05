@@ -1,11 +1,11 @@
 r_m3=2;
 r_tete=3.5;
 r_trou=1.5;
-ep=4;
+ep=3;
 r_ext=5;
 ecart=92;
 esp_fix=8;
-r_rondelle=4;
+r_rondelle=4.1;
 
 module plaque_flanc(){
 	difference(){
