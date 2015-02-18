@@ -1,4 +1,4 @@
-#Fichier modèle pour les perçages
+﻿#Fichier modèle pour les perçages
 #Il faut absolument respecter l'ordre suivant dans les modules : PARAMETRES, VARIABLES, INSTRUCTIONS
 
 PARAMETRES{
@@ -37,9 +37,7 @@ INSTRUCTIONS{
 	trou([238,168.5]);
 
 	#Trous de fixation de l'alimentation électrique
-	trou([234,248]);
 	trou([194,248]);
 	trou([234,403]);
-	trou([194,403]);
 	
 }

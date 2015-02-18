@@ -339,8 +339,8 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {46, 64, 2560,152}    // from TO-007 to TO-015 (T5)
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {64, 64, 2560,152}    // from TO-016 to TO-045 (T5 + M8)
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {64, 64, 4000,152}    // from TO-046 to TO-048 (T5 + M5)
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {66.84, 66.84, 4000,152}    // from T0-049 to TO-0 (HTD3M + M5)
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {75, 75, 4000,152}    // from T0-049 to TO-0 (T2.5 + M5)
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {66.84, 66.84, 4000,152}    // from T0-049 to TO-0 (HTD3M + M5) -> courroies blanches, sur la majeure partie des kits Tobeca 2
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   {75, 75, 4000,152}    // from T0-049 to TO-0 (T2.5 + M5) -> courroies noires, sur quelques kits Tobeca 2
 
 
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 3, 60}    // (mm/sec)
