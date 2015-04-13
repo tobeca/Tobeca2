@@ -38,6 +38,7 @@ module bloc_profile(){
 		translate([-5,7,hauteur/2+3-wantai]){rotate([0,90,0])cylinder(h=25, r=r_m3, $fn=50);}
 		translate([8,7,hauteur/2+3-wantai]){rotate([0,90,0])cylinder(h=25, r=r_ecrou_m3, $fn=6);}
 		
+		
 	
 	}
 	
@@ -61,6 +62,7 @@ module plaque_moteur(){
 
 		//trou pour collier de serrage pour faisceau de câbles
 		translate([nema-dec-5,(nema+19)/2+nema/2-dec+10,-5]){cylinder(h = 15, r = r_m3, $fn=50);}
+		translate([nema-dec-5,4,-5]){cylinder(h = 15, r = r_m3, $fn=50);}
 	}
 	
 }

@@ -60,6 +60,7 @@ module plaque_moteur(){
 
 		//trou pour collier de serrage pour faisceau de câbles
 		translate([nema-dec-5,(nema+19)/2+nema/2-dec+10,-5]){cylinder(h = 15, r = r_m3, $fn=50);}
+		translate([nema-dec-5,4,-5]){cylinder(h = 15, r = r_m3, $fn=50);}
 	}
 	
 }

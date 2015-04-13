@@ -20,8 +20,12 @@ module boitier(){
 		//ouvertures pour écran
 		translate([7,-r_ext-5,12.5]){cube([26,10,78]);}
 
+		//trous pour visser carte
+		translate([-8,-r_ext-5,5]){rotate([-90,0,0])cylinder(h = 15, r = 2, $fn=50);}
+		translate([-8,-r_ext-5,hauteur-5]){rotate([-90,0,0])cylinder(h = 15, r = 2, $fn=50);}
+
 		//trou pour encodeur
-		translate([59,-r_ext-5,63]){rotate([-90,0,0])cylinder(h = 15, r = 6, $fn=50);}
+		translate([59,-r_ext-5,63]){rotate([-90,0,0])cylinder(h = 15, r = 5, $fn=50);}
 		
 		
 	}
@@ -57,7 +61,7 @@ module capot(){
             //déport pour maintenir l'écran en place
             translate([-r_ext+19,-r_ext+12,-7]){cube([10,5,7]);}
             translate([-r_ext+43,-r_ext+12,-7]){cube([10,5,7]);}
-            translate([-r_ext+19,-r_ext+ep,-3]){cube([34,10,2.5]);}
+            translate([-r_ext+19,-r_ext+ep,-3]){cube([34,10,3]);}
             
         }
         //trous de vissage
@@ -73,5 +77,5 @@ module capot(){
 }
 
 //boitier();
-//rotate([180,0,0])mirror(1,0,0)capot();
-rotate([180,0,0])capot();
+capot();
+//translate([0,0,-ep])capot();

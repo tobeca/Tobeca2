@@ -339,15 +339,15 @@ const bool Z_ENDSTOPS_INVERTING = false; // set to true to invert the logic of t
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {46, 64, 2560,152}    // from TO-007 to TO-015 (T5)
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {64, 64, 2560,152}    // from TO-016 to TO-045 (T5 + M8)
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {64, 64, 4000,152}    // from TO-046 to TO-048 (T5 + M5)
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {66.84, 66.84, 4000,140}    // from T0-049 to TO-0 (HTD3M + M5) -> courroies blanches, sur la majeure partie des kits Tobeca 2
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {66.84, 66.84, 4000,152}    // from T0-049 to TO-0 (HTD3M + M5) -> courroies blanches, sur la majeure partie des kits Tobeca 2
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {75, 75, 4000,152}    // from T0-049 to TO-0 (T2.5 + M5) -> courroies noires, sur quelques kits Tobeca 2
 
 
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 3, 60}    // (mm/sec)
-#define DEFAULT_MAX_ACCELERATION      {2000,2000,100,15000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
+#define DEFAULT_MAX_ACCELERATION      {5000,5000,100,12000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
 
-#define DEFAULT_ACCELERATION          1500    // X, Y, Z and E max acceleration in mm/s^2 for printing moves 
-#define DEFAULT_RETRACT_ACCELERATION  10000   // X, Y, Z and E max acceleration in mm/s^2 for r retracts
+#define DEFAULT_ACCELERATION          2000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves 
+#define DEFAULT_RETRACT_ACCELERATION  4000   // X, Y, Z and E max acceleration in mm/s^2 for r retracts
 
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).

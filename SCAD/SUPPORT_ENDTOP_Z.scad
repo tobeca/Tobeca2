@@ -34,12 +34,12 @@ module support_endstop(){
 	difference(){
 		cube([28.5,longueur,hauteur]);
 		
-		translate([1.5,4.5,-5]){cube([30,6.5,20]);}
-		translate([0,18.5,-5]){cube([35,20,20]);}
+		translate([1.5,4.5,-5]){cube([30,6.5,hauteur+10]);}
+		translate([0,18.5,-5]){cube([35,20,hauteur+10]);}
 
 		//trou pour serrage contact de fin de course
-		translate([23.5,-5,hauteur/2]){rotate([-90,0,0])cylinder(h=10, r=r_m3, $fn=50);}
-		translate([23.5,10,hauteur/2]){rotate([-90,0,0])cylinder(h=30, r=1.2, $fn=50);}
+		translate([23.5,-5,hauteur/2]){rotate([-90,0,0])cylinder(h=hauteur, r=r_m3, $fn=50);}
+		translate([23.5,10,hauteur/2]){rotate([-90,0,0])cylinder(h=hauteur, r=1.2, $fn=50);}
 	}
 
 }
