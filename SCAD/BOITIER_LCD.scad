@@ -55,9 +55,9 @@ module capot(){
                 translate([55,25,0]){cylinder(h = ep, r = 8, $fn=100);}
             }
             //déport pour maintenir l'écran en place
-            translate([-r_ext+19,-r_ext+12,-7]){cube([10,5,7]);}
-            translate([-r_ext+43,-r_ext+12,-7]){cube([10,5,7]);}
-            translate([-r_ext+19,-r_ext+ep,-3]){cube([34,10,2.5]);}
+            translate([-r_ext+19,-r_ext+13,-7]){cube([10,5,7]);}
+            translate([-r_ext+43,-r_ext+13,-7]){cube([10,5,7]);}
+            translate([-r_ext+19,-r_ext+ep,-2.5]){cube([34,11,2.5]);}
             
         }
         //trous de vissage
@@ -75,3 +75,4 @@ module capot(){
 //boitier();
 //rotate([180,0,0])mirror(1,0,0)capot();
 rotate([180,0,0])capot();
+//capot();
