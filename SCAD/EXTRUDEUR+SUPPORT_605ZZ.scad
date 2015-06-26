@@ -160,6 +160,17 @@ module support_605(){
 			translate([-5,15,ep_605+surep]){rotate([0,90,0])cylinder(r=2.5, h=ep+10, $fn=50);}
 			translate([-5,15,ep_605+5+surep]){rotate([0,90,0])cylinder(r=2.5, h=ep+10, $fn=50);}
 		}
+        
+        //exrusion pour passage colerette moteur
+        hull(){
+            translate([1,20,-5]){cylinder(r=2.5, h=ep+10, $fn=50);}
+            translate([1,10,-5]){cylinder(r=2.5, h=ep+10, $fn=50);}
+        }
+        
+        hull(){
+            translate([ep-1,20,-5]){cylinder(r=2.5, h=ep+10, $fn=50);}
+            translate([ep-1,10,-5]){cylinder(r=2.5, h=ep+10, $fn=50);}
+        }
 		
 
 		//extrusion pour libérer un peu le bloc
@@ -195,9 +206,9 @@ module support_605(){
 
 }
 
-double_extrudeur();
+//double_extrudeur();
 //translate([-surep,10+44.55/2-15,ep]){rotate([0,90,0])support_605();}
 //translate([largeur+surep,10+44.55/2-15,0]){rotate([0,-90,0])support_605();}
 
 //translate([100,0,0]){support_605();}
-//support_605();
+support_605();

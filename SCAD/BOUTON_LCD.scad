@@ -15,11 +15,11 @@ module roue(){
             translate([0,0,4]){cylinder(h=ep-4, r=r_roue, $fn=200);}
             
             //cylindre d'encastrement
-            translate([0,0,ep]){cylinder(h=4, r=r_trou+1.2, $fn=100);}
+            translate([0,0,ep]){cylinder(h=6, r=r_trou+1.2, $fn=100);}
 		}
 
 		//trou central
-		translate([0,0,1]){cylinder(h=ep+3.02, r1=r_trou, r2=r_trou+0.3, $fn=100);}
+		translate([0,0,1]){cylinder(h=ep+6, r1=r_trou, r2=r_trou+0.3, $fn=100);}
 
 		//grip sur le rayon extérieur
 		for(i=[0:1:nb_trou]){

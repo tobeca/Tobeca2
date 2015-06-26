@@ -18,8 +18,11 @@ CardReader::CardReader()
    saving = false;
    logging = false;
    autostart_atmillis=0;
+   workDirDepth = 0;
+   file_subcall_ctr=0;
+   memset(workDirParents, 0, sizeof(workDirParents));
 
-   autostart_stilltocheck=true; //the sd start is delayed, because otherwise the serial cannot answer fast enought to make contact with the hostsoftware.
+   autostart_stilltocheck=true; //the SD start is delayed, because otherwise the serial cannot answer fast enough to make contact with the host software.
    lastnr=0;
   //power to SD reader
   #if SDPOWER > -1
@@ -47,7 +50,7 @@ char *createFilename(char *buffer,const dir_t &p) //buffer>12characters
 }
 
 
-void  CardReader::lsDive(const char *prepend,SdFile parent)
+void CardReader::lsDive(const char *prepend, SdFile parent, const char * const match/*=NULL*/)
 {
   dir_t p;
  uint8_t cnt=0;
@@ -89,16 +92,12 @@ void  CardReader::lsDive(const char *prepend,SdFile parent)
     }
     else
     {
-      if (p.name[0] == DIR_NAME_FREE) break;
-      if (p.name[0] == DIR_NAME_DELETED || p.name[0] == '.'|| p.name[0] == '_') continue;
-      if (longFilename[0] != '\0' &&
-          (longFilename[0] == '.' || longFilename[0] == '_')) continue;
-      if ( p.name[0] == '.')
-      {
-        if ( p.name[1] != '.')
-        continue;
-      }
-      
+      char pn0 = p.name[0];
+      if (pn0 == DIR_NAME_FREE) break;
+      if (pn0 == DIR_NAME_DELETED || pn0 == '.' || pn0 == '_') continue;
+      char lf0 = longFilename[0];
+      if (lf0 == '.' || lf0 == '_') continue;
+
       if (!DIR_IS_FILE_OR_SUBDIR(&p)) continue;
       filenameIsDir=DIR_IS_SUBDIR(&p);
       
@@ -121,8 +120,10 @@ void  CardReader::lsDive(const char *prepend,SdFile parent)
       } 
       else if(lsAction==LS_GetFilename)
       {
-        if(cnt==nrFiles)
-          return;
+        if (match != NULL) {
+          if (strcasecmp(match, filename) == 0) return;
+        }
+        else if (cnt == nrFiles) return;
         cnt++;
         
       }
@@ -147,9 +148,17 @@ void CardReader::initsd()
   if(root.isOpen())
     root.close();
 #ifdef SDSLOW
-  if (!card.init(SPI_HALF_SPEED,SDSS))
+  if (!card.init(SPI_HALF_SPEED,SDSS)
+  #if defined(LCD_SDSS) && (LCD_SDSS != SDSS)
+    && !card.init(SPI_HALF_SPEED,LCD_SDSS)
+  #endif
+    )
 #else
-  if (!card.init(SPI_FULL_SPEED,SDSS))
+  if (!card.init(SPI_FULL_SPEED,SDSS)
+  #if defined(LCD_SDSS) && (LCD_SDSS != SDSS)
+    && !card.init(SPI_FULL_SPEED,LCD_SDSS)
+  #endif
+    )
 #endif
   {
     //if (!card.init(SPI_HALF_SPEED,SDSS))
@@ -204,7 +213,6 @@ void CardReader::startFileprint()
   if(cardOK)
   {
     sdprinting = true;
-    
   }
 }
 
@@ -223,14 +231,71 @@ void CardReader::openLogFile(char* name)
   openFile(name, false);
 }
 
-void CardReader::openFile(char* name,bool read)
+void CardReader::getAbsFilename(char *t)
+{
+  uint8_t cnt=0;
+  *t='/';t++;cnt++;
+  for(uint8_t i=0;i<workDirDepth;i++)
+  {
+    workDirParents[i].getFilename(t); //SDBaseFile.getfilename!
+    while(*t!=0 && cnt< MAXPATHNAMELENGTH) 
+    {t++;cnt++;}  //crawl counter forward.
+  }
+  if(cnt<MAXPATHNAMELENGTH-13)
+    file.getFilename(t);
+  else
+    t[0]=0;
+}
+
+void CardReader::openFile(char* name,bool read, bool replace_current/*=true*/)
 {
   if(!cardOK)
     return;
-  file.close();
+  if(file.isOpen())  //replacing current file by new file, or subfile call
+  {
+    if(!replace_current)
+    {
+     if((int)file_subcall_ctr>(int)SD_PROCEDURE_DEPTH-1)
+     {
+       SERIAL_ERROR_START;
+       SERIAL_ERRORPGM("trying to call sub-gcode files with too many levels. MAX level is:");
+       SERIAL_ERRORLN(SD_PROCEDURE_DEPTH);
+       kill();
+       return;
+     }
+     
+     SERIAL_ECHO_START;
+     SERIAL_ECHOPGM("SUBROUTINE CALL target:\"");
+     SERIAL_ECHO(name);
+     SERIAL_ECHOPGM("\" parent:\"");
+     
+     //store current filename and position
+     getAbsFilename(filenames[file_subcall_ctr]);
+     
+     SERIAL_ECHO(filenames[file_subcall_ctr]);
+     SERIAL_ECHOPGM("\" pos");
+     SERIAL_ECHOLN(sdpos);
+     filespos[file_subcall_ctr]=sdpos;
+     file_subcall_ctr++;
+    }
+    else
+    {
+     SERIAL_ECHO_START;
+     SERIAL_ECHOPGM("Now doing file: ");
+     SERIAL_ECHOLN(name);
+    }
+    file.close();
+  }
+  else //opening fresh file
+  {
+    file_subcall_ctr=0; //resetting procedure depth in case user cancels print while in procedure
+    SERIAL_ECHO_START;
+    SERIAL_ECHOPGM("Now fresh file: ");
+    SERIAL_ECHOLN(name);
+  }
   sdprinting = false;
   
-  
+ 
   SdFile myDir;
   curDir=&root;
   char *fname=name;
@@ -291,7 +356,8 @@ void CardReader::openFile(char* name,bool read)
       sdpos = 0;
       
       SERIAL_PROTOCOLLNPGM(MSG_SD_FILE_SELECTED);
-      lcd_setstatus(fname);
+      getfilename(0, fname);
+      lcd_setstatus(longFilename[0] ? longFilename : fname);
     }
     else
     {
@@ -378,7 +444,7 @@ void CardReader::removeFile(char* name)
     if (file.remove(curDir, fname)) 
     {
       SERIAL_PROTOCOLPGM("File deleted:");
-      SERIAL_PROTOCOL(fname);
+      SERIAL_PROTOCOLLN(fname);
       sdpos = 0;
     }
     else
@@ -476,21 +542,30 @@ void CardReader::checkautostart(bool force)
     lastnr++;
 }
 
-void CardReader::closefile()
+void CardReader::closefile(bool store_location)
 {
   file.sync();
   file.close();
   saving = false; 
   logging = false;
+  
+  if(store_location)
+  {
+    //future: store printer state, filename and position for continuing a stopped print
+    // so one can unplug the printer and continue printing the next day.
+    
+  }
+
+  
 }
 
-void CardReader::getfilename(const uint8_t nr)
+void CardReader::getfilename(uint16_t nr, const char * const match/*=NULL*/)
 {
   curDir=&workDir;
   lsAction=LS_GetFilename;
   nrFiles=nr;
   curDir->rewind();
-  lsDive("",*curDir);
+  lsDive("",*curDir,match);
   
 }
 
@@ -521,19 +596,24 @@ void CardReader::chdir(const char * relpath)
   }
   else
   {
-    workDirParentParent=workDirParent;
-    workDirParent=*parent;
-    
+    if (workDirDepth < MAX_DIR_DEPTH) {
+      for (int d = ++workDirDepth; d--;)
+        workDirParents[d+1] = workDirParents[d];
+      workDirParents[0]=*parent;
+    }
     workDir=newfile;
   }
 }
 
 void CardReader::updir()
 {
-  if(!workDir.isRoot())
+  if(workDirDepth > 0)
   {
-    workDir=workDirParent;
-    workDirParent=workDirParentParent;
+    --workDirDepth;
+    workDir = workDirParents[0];
+    int d;
+    for (int d = 0; d < workDirDepth; d++)
+      workDirParents[d] = workDirParents[d+1];
   }
 }
 
@@ -541,14 +621,25 @@ void CardReader::updir()
 void CardReader::printingHasFinished()
 {
     st_synchronize();
-    quickStop();
-    file.close();
-    sdprinting = false;
-    if(SD_FINISHED_STEPPERRELEASE)
+    if(file_subcall_ctr>0) //heading up to a parent file that called current as a procedure.
     {
-        //finishAndDisableSteppers();
-        enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
+      file.close();
+      file_subcall_ctr--;
+      openFile(filenames[file_subcall_ctr],true,true);
+      setIndex(filespos[file_subcall_ctr]);
+      startFileprint();
     }
-    autotempShutdown();
+    else
+    {
+      quickStop();
+      file.close();
+      sdprinting = false;
+      if(SD_FINISHED_STEPPERRELEASE)
+      {
+          //finishAndDisableSteppers();
+          enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
+      }
+      autotempShutdown();
+    }
 }
 #endif //SDSUPPORT

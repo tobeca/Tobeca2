@@ -1,30 +1,43 @@
-height=20;
-long=14;
-larg=21.5;
-r_arbre=4.2;
 r_m3=2;
+r_tete_m3=3.5;
 r_ecrou_m3=3.3;
+r_m6=3.2;
 
 module endstop_x(){
-	difference(){	
-		union(){
-			cube([long,larg,height]);
-
-			//cônes pour endstop
-			translate([long-8,larg-1,height]){cylinder(h = 1, r1 = 1, r2 = 0.6, $fn=50);}
-			translate([long-8,larg-11,height]){cylinder(h = 1, r1 = 1, r2 = 0.6, $fn=50);}
-			
-		}
-		
-		//trou pour passage arbre
-		translate([-5,larg-10,11]){rotate([0,90,0])cylinder(r=r_arbre, h=30, $fn=50);}
-		translate([-5,larg-10-0.5,-5]){cube([30,1,16]);}
-
-		//trou pour serrage arbre avec vis
-		translate([long/2,larg/2-0.5,4]){rotate([-90,0,0])cylinder(r=r_m3, h=15, $fn=50);}
-		translate([long/2,-0.5,4]){rotate([-90,0,0])cylinder(r=1.35, h=larg/2+1, $fn=50);}
-
-		
-	}
+    difference(){
+        union(){
+            translate([13,0,0]){cube([38.5,30,5]);}
+            translate([13,5,4]){cube([26,13,25]);}
+        }
+        
+        //trou central d'arbre
+        hull(){
+            translate([26.5,15,-5]){cylinder(r=5, h=50, $fn=100);}
+            translate([60,15,-5]){cylinder(r=5, h=50, $fn=100);}
+        }
+        
+        //trous de montage
+        
+        translate([26.5+19.5,15-8,-5]){cylinder(r=r_m6, h=15, $fn=50);}
+        translate([26.5+19.5,15+8,-5]){cylinder(r=r_m6, h=15, $fn=50);}
+        
+        
+        
+        
+        //trous pour collier de serrage spirale
+        hull(){
+            translate([26.5-5-2,0,10]){rotate([-90,0,0])cylinder(r=2, h=50, $fn=50);}
+            translate([26.5-5-2,0,12]){rotate([-90,0,0])cylinder(r=2, h=50, $fn=50);}
+        }
+        
+        //trous pour fixation contact de fin de course
+        translate([18,0,24]){rotate([-90,0,0])cylinder(r=2, h=50, $fn=50);}
+        translate([18+9,0,24]){rotate([-90,0,0])cylinder(r=2, h=50, $fn=50);}
+        
+        translate([18,19,24]){rotate([90,0,0])cylinder(r=3.5, h=12, $fn=50);}
+        translate([18+9,19,24]){rotate([90,0,0])cylinder(r=3.5, h=12, $fn=50);}
+    }
 }
+
+
 endstop_x();
