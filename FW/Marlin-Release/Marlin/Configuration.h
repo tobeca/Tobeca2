@@ -32,7 +32,7 @@
 //Choisir les valeurs adaptées à votre imprimante ci dessous.
 //{80, 80, 4000,139.75} pour courroies noires GT2 souples (goomme + Nylon)
 //{64, 64, 4000,152} pour courroies blanches HTD3M rigides (PU + acier)
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {64, 64, 4000,139.75}    
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {67.5, 67.5, 4000,139.75}    
 
 //Ecran optionnel
 //décommenter la ligne correspondante à votre écran et flasher la carte avec l'écran branché uniquement
