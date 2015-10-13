@@ -1,5 +1,5 @@
 ; Generation GCODE par OpenASCAM - Adrien Grelet - 2013
-; Generation fichier : Mon Sep 29 08:45:47 2014
+; Generation fichier : Mon Oct 12 21:28:31 2015
 
 ; ep_matiere=9
 ; marge_z=12
@@ -23,16 +23,16 @@ G1 Z41.0 F3000 ; hauteur de déplacement Z, incluant son offset
 
 ; offy=21.5
 G1 F300
-G1 X51.0 Y180.0 F3000
+G1 X76.0 Y180.0 F3000
 G1 F500
 G1 Z30.5 F3000
 G1 F350
 G1 Z20.0 F500
 G1 F350
-G1 X51.0 Y270.0 F3000
-G1 X126.0 Y270.0 F3000
-G1 X126.0 Y180.0 F3000
-G1 X51.0 Y180.0 F3000
+G1 X76.0 Y270.0 F3000
+G1 X151.0 Y270.0 F3000
+G1 X151.0 Y180.0 F3000
+G1 X76.0 Y180.0 F3000
 G1 Z41.0 F3000
 M42 P7 S0 ; on arrête la fraise
 G1 Z40 

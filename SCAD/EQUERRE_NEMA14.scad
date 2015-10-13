@@ -8,12 +8,13 @@ pos_vis=19;
 hauteur=20;
 entraxe=74;
 nema=35;
-r_centre=12;
+r_centre=11;
 dec=4.5;
 longueur=29;
 ep=3;
 hauteurf=8;
 r_rond=9;
+tete_m3=3.5;
 
 module bloc_profile(){
 	difference(){
@@ -46,29 +47,38 @@ module plaque_moteur(){
 	difference(){
 		//plaque pour fixer le moteur
 		hull(){
-			cube([nema-r_rond,nema+19,ep]);
-			translate([nema-r_rond,nema+19-r_rond,0]){cylinder(h = ep, r = r_rond, $fn=100);}
-			translate([nema-r_rond,r_rond,0]){cylinder(h = ep, r = r_rond, $fn=100);}
+			cube([nema-r_rond,nema+19,hauteur]);
+			translate([nema-r_rond,nema+19-r_rond,0]){cylinder(h = hauteur, r = r_rond, $fn=100);}
+			translate([nema-r_rond,r_rond,0]){cylinder(h = hauteur, r = r_rond, $fn=100);}
 		}
 
 		//trous pour le moteur
-		translate([nema/2,(nema+19)/2,-5]){cylinder(h = 15, r = r_centre, $fn=100);}
-		translate([dec,(nema+19)/2-nema/2+dec,-5]){cylinder(h = 15, r = r_m3, $fn=50);}
-		//translate([dec,(nema+19)/2+nema/2-dec,-5]){cylinder(h = 15, r = r_m3, $fn=50);}
-		//translate([nema-dec,(nema+19)/2-nema/2+dec,-5]){cylinder(h = 15, r = r_m3, $fn=50);}
-		translate([nema-dec,(nema+19)/2+nema/2-dec,-5]){cylinder(h = 15, r = r_m3, $fn=50);}
+		translate([nema/2,(nema+19)/2,-5]){cylinder(h = hauteur+20, r = r_centre, $fn=100);}
+        translate([nema/2,(nema+19)/2,8]){cylinder(h = hauteur+20, r = 15, $fn=100);}
+        
+        //trou pour dégager serrage de l'accouplement
+        hull(){
+        translate([nema/2,(nema+19)/2,hauteur]){rotate([0,90,0])cylinder(h = hauteur+20, r = 7, $fn=100);}
+        translate([nema/2,(nema+19)/2,10+4]){rotate([0,90,0])cylinder(h = hauteur+20, r = 7, $fn=100);}
+    }
+        
+		translate([dec,(nema+19)/2-nema/2+dec,-5]){cylinder(h = hauteur+20, r = r_m3, $fn=50);}
+		translate([nema-dec,(nema+19)/2+nema/2-dec,-5]){cylinder(h = hauteur+10, r = r_m3, $fn=50);}
+        
+        translate([dec,(nema+19)/2-nema/2+dec,16]){cylinder(h = hauteur+20, r = tete_m3, $fn=50);}
+		translate([nema-dec,(nema+19)/2+nema/2-dec,16]){cylinder(h = hauteur+10, r = tete_m3, $fn=50);}
 
 		//trou pour collier de serrage pour faisceau de câbles
-		translate([nema-dec-5,(nema+19)/2+nema/2-dec+10,-5]){cylinder(h = 15, r = r_m3, $fn=50);}
-		translate([nema-dec-5,4,-5]){cylinder(h = 15, r = r_m3, $fn=50);}
+		translate([nema-dec-5,(nema+19)/2+nema/2-dec+10,-5]){cylinder(h = hauteur+10, r = r_m3, $fn=50);}
+		translate([nema-dec-5,4,-5]){cylinder(h = hauteur+10, r = r_m3, $fn=50);}
 	}
 	
 }
 
 module arrondi(){
 	difference(){
-		cube([12,12,3]);
-		translate([12,0,-5]){cylinder(h = ep+10, r = 12, $fn=100);}
+		cube([12,12,hauteur]);
+		translate([12,0,-5]){cylinder(h = hauteur+10, r = 12, $fn=100);}
 	}
 }
 
@@ -87,10 +97,9 @@ module support_endstop(){
 }
 
 bloc_profile();
-//translate([ep_bloc_base,6,0]){support_endstop();}
 translate([0,entraxe+16+16,0]){mirror([0,1,0])bloc_profile();}
 
 translate([5,l_bloc,0]){plaque_moteur();}
 
 translate([ep_bloc_base+3,l_bloc-12,0]){arrondi();}
-translate([ep_bloc_base+3,l_bloc+nema+16+15,ep]){rotate([180,0,])arrondi();}
+translate([ep_bloc_base+3,l_bloc+nema+16+15,hauteur]){rotate([180,0,])arrondi();}

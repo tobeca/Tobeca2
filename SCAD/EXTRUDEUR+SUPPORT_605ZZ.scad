@@ -28,6 +28,10 @@ module double_extrudeur(){
 		//trous généraux pour passage filament
 		translate([18,-50,ep/2]){rotate([-90,0,0])cylinder(r=r_filament, h=150, $fn=50);}
 		translate([52,-50,ep/2]){rotate([-90,0,0])cylinder(r=r_filament, h=150, $fn=50);}
+        
+        //trou pour verrouillage chariot au transport avec insert M3
+        translate([18+17,-50,ep/2]){rotate([-90,0,0])cylinder(r=1.7, h=150, $fn=50);}
+        translate([18+17,-50,ep/2]){rotate([-90,0,0])cylinder(r=3.3, h=75, $fn=6);}
 		
 
 		//lamage pour supporter les tubes en teflon
@@ -206,9 +210,9 @@ module support_605(){
 
 }
 
-//double_extrudeur();
+double_extrudeur();
 //translate([-surep,10+44.55/2-15,ep]){rotate([0,90,0])support_605();}
 //translate([largeur+surep,10+44.55/2-15,0]){rotate([0,-90,0])support_605();}
 
 //translate([100,0,0]){support_605();}
-support_605();
+//support_605();

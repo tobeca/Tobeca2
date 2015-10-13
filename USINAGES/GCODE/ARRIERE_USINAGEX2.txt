@@ -1,4 +1,4 @@
-#Fichier modèle pour les perçages
+﻿#Fichier modèle pour les perçages
 #Il faut absolument respecter l'ordre suivant dans les modules : PARAMETRES, VARIABLES, INSTRUCTIONS
 
 PARAMETRES{
@@ -26,6 +26,6 @@ VARIABLES{
 INSTRUCTIONS{
 
 	#Ouverture du milieu en usinage
-	rectangle([45,157.5+offy,125,252.5+offy]);
+	rectangle([70,157.5+offy,150,252.5+offy]);
 	
 }

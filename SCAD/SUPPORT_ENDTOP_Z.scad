@@ -5,7 +5,7 @@ r_m3_for=1.4;
 r_m3=2;
 r_ecrou_m3=3.3;
 pos_vis=19;
-hauteur=10;
+hauteur=30;
 
 longueur=29;
 
@@ -32,14 +32,14 @@ module bloc_profile(){
 
 module support_endstop(){
 	difference(){
-		cube([28.5,longueur,hauteur]);
+		cube([28.5+5,longueur,hauteur]);
 		
-		translate([1.5,4.5,-5]){cube([30,6.5,hauteur+10]);}
+		translate([1.5,4.5,-5]){cube([35,6.5,hauteur+10]);}
 		translate([0,18.5,-5]){cube([35,20,hauteur+10]);}
 
 		//trou pour serrage contact de fin de course
-		translate([23.5,-5,hauteur/2]){rotate([-90,0,0])cylinder(h=hauteur, r=r_m3, $fn=50);}
-		translate([23.5,10,hauteur/2]){rotate([-90,0,0])cylinder(h=hauteur, r=1.2, $fn=50);}
+		translate([23.5,-5,hauteur/2+7]){rotate([-90,0,0])cylinder(h=10, r=r_m3, $fn=50);}
+		translate([23.5,10,hauteur/2+7]){rotate([-90,0,0])cylinder(h=hauteur, r=1.2, $fn=50);}
 	}
 
 }

@@ -26,18 +26,40 @@ VARIABLES{
 }
 
 INSTRUCTIONS{
+	trou([126,4.5]);
+	trou([286,4.5]);
+
 	#Trous de fixation du moteur
 	trou([198.5,14]);
 	trou([229.5,14]);
 	trou([229.5,45]);
 	trou([198.5,45]);
-	
+
 	#Trous de fixation du boitier électronique
 	trou([190,87.5]);
 	trou([238,168.5]);
 
+
+	trou([largeur-4.5,145]);
+
+	#Trous de fixation rangement écran LCD
+	trou([380,272]);
+
+	trou([largeur-4.5,300]);
+
+	#Trous de fixation rangement écran LCD
+	trou([380,429]);
+
+	trou([286,longueur-4.5]);
+	trou([126,longueur-4.5]);
+	
 	#Trous de fixation de l'alimentation électrique
-	trou([194,248]);
 	trou([234,403]);
+	trou([194,248]);
+
+	trou([4.5,300]);
+	trou([4.5,145]);
+
+
 	
 }

@@ -1,4 +1,4 @@
-#Fichier modèle pour les perçages
+﻿#Fichier modèle pour les perçages
 #Il faut absolument respecter l'ordre suivant dans les modules : PARAMETRES, VARIABLES, INSTRUCTIONS
 
 PARAMETRES{
@@ -31,6 +31,10 @@ INSTRUCTIONS{
 	
 	#Trou plateau 1
 	trou([d_bord,10]);
+
+	#Trous pour bridage
+	trou([21,10]);
+	trou([39,10]);
 	
 	#Trous SC10UU gauche
 	trou([30-x_dou/2,94.5]);
@@ -60,5 +64,9 @@ INSTRUCTIONS{
 	
 	#Trou plateau 4
 	trou([longueur-d_bord,10]);
+	
+	#Trous pour bridage
+	trou([189,10]);
+	trou([171,10]);
 
 }

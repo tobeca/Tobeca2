@@ -20,8 +20,8 @@ module plaque_flanc(){
 		translate([ecart,0,-5]){cylinder(h=20, r=r_m3, $fn=50);}
 
 		//encastrement rondelles d'usure
-		translate([0,0,ep-0.75]){cylinder(h=5, r=r_rondelle, $fn=50);}
-		translate([ecart,0,ep-0.75]){cylinder(h=5, r=r_rondelle, $fn=50);}
+		//translate([0,0,ep-0.75]){cylinder(h=5, r=r_rondelle, $fn=50);}
+		//translate([ecart,0,ep-0.75]){cylinder(h=5, r=r_rondelle, $fn=50);}
 
 		//trous de vissage
 		translate([esp_fix,0,-5]){cylinder(h = 20, r = r_trou, $fn=50);}

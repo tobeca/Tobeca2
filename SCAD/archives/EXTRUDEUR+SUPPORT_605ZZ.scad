@@ -1,7 +1,7 @@
 largeur=70;
 ep=25;
 hauteur=60;
-r_filament=1.6;
+r_filament=1.2;
 r_m3=2;
 ecrou_m3=3.2;
 ecart_pignon=4+1.1;
@@ -21,24 +21,28 @@ module double_extrudeur(){
 	union(){
 		cube([largeur,hauteur,ep]);
 		translate([0,-epde,0]){cube([largeur,epde,ep]);}
+        translate([ep/2-2,-epde,ep/2]){rotate([-90,0,0])cylinder(r=ep/2, h=epde+10, $fn=100);}
+        translate([largeur-ep/2+2,-epde,ep/2]){rotate([-90,0,0])cylinder(r=ep/2, h=epde+10, $fn=100);}
 	}
 
 		//trous généraux pour passage filament
-		translate([17.7,-50,ep/2]){rotate([-90,0,0])cylinder(r=r_filament, h=150, $fn=50);}
-		translate([52.3,-50,ep/2]){rotate([-90,0,0])cylinder(r=r_filament, h=150, $fn=50);}
+		translate([18,-50,ep/2]){rotate([-90,0,0])cylinder(r=r_filament, h=150, $fn=50);}
+		translate([52,-50,ep/2]){rotate([-90,0,0])cylinder(r=r_filament, h=150, $fn=50);}
 		
 
 		//lamage pour supporter les tubes en teflon
-		translate([17.7,hauteur+5,ep/2]){rotate([90,0,0])cylinder(r=r_tube, h=10, $fn=50);}
-		translate([52.3,hauteur+5,ep/2]){rotate([90,0,0])cylinder(r=r_tube, h=10, $fn=50);}
-		translate([17.7,hauteur-4.99,ep/2]){rotate([90,0,0])cylinder(r1=r_tube, r2=r_filament, h=4, $fn=100);}
-		translate([52.3,hauteur-4.99,ep/2]){rotate([90,0,0])cylinder(r1=r_tube, r2=r_filament,h=4, $fn=100);}
+		translate([18,hauteur+5,ep/2]){rotate([90,0,0])cylinder(r=r_tube, h=10, $fn=50);}
+		translate([52,hauteur+5,ep/2]){rotate([90,0,0])cylinder(r=r_tube, h=10, $fn=50);}
+		translate([18,hauteur-4.99,ep/2]){rotate([90,0,0])cylinder(r1=r_tube, r2=r_filament, h=4, $fn=100);}
+		translate([52,hauteur-4.99,ep/2]){rotate([90,0,0])cylinder(r1=r_tube, r2=r_filament,h=4, $fn=100);}
 
 		//trous de fixation sur plaque alu
 		translate([5,-50,ep/2]){rotate([-90,0,0])cylinder(r=r_m3, h=100, $fn=50);}
 		translate([largeur-5,-50,ep/2]){rotate([-90,0,0])cylinder(r=r_m3, h=100, $fn=50);}
-		translate([5,10-4,ep/2]){rotate([-90,30,0])cylinder(r=ecrou_m3, h=5, $fn=6);}
-		translate([largeur-5,10-4,ep/2]){rotate([-90,30,0])cylinder(r=ecrou_m3, h=5, $fn=6);}
+        translate([5,7,ep/2]){rotate([-90,0,0])cylinder(r=3.5, h=10, $fn=50);}
+		translate([largeur-5,7,ep/2]){rotate([-90,0,0])cylinder(r=3.5, h=10, $fn=50);}
+		translate([5,-25,ep/2]){rotate([-90,30,0])cylinder(r=ecrou_m3, h=5, $fn=6);}
+		translate([largeur-5,-25,ep/2]){rotate([-90,30,0])cylinder(r=ecrou_m3, h=5, $fn=6);}
 
 		//trous pour fixation des moteurs gauche
 		translate([17.7+ecart_pignon,10,-5]){cylinder(r=r_m3, h=ep+10, $fn=50);}
@@ -92,26 +96,21 @@ module double_extrudeur(){
 
 
 		//extrusions pour bloquer les têtes
-		//translate([17.7,-epde-5,ep/2]){rotate([-90,0,0])cylinder(r=5, h=12, $fn=100);}
-		translate([17.7,-epde-5,ep/2]){rotate([-90,0,0])cylinder(r=8.5, h=9, $fn=100);}
-		//translate([52.3,-epde-5,ep/2]){rotate([-90,0,0])cylinder(r=5, h=12, $fn=100);}
-		translate([52.3,-epde-5,ep/2]){rotate([-90,0,0])cylinder(r=8.5, h=9, $fn=100);}
+
+		translate([18,-epde-5,ep/2]){rotate([-90,0,0])cylinder(r=8.5, h=9, $fn=100);}
+	
+		translate([52,-epde-5,ep/2]){rotate([-90,0,0])cylinder(r=8.5, h=9, $fn=100);}
 
 		//trous traversants pour serrer les ressorts
 		translate([-5,10+44.55/2-15+5,6]){rotate([0,90,0])cylinder(r=r_m5, h=100, $fn=50);}
-		//translate([-5,10+44.55/2-15+5,6]){rotate([0,90,0])cylinder(r=r_m5+0.5, h=44, $fn=50);}
+		
 		
 
 		translate([-5,10+44.55/2-15+5,ep-6]){rotate([0,90,0])cylinder(r=r_m5, h=100, $fn=50);}
-		//translate([31,10+44.55/2-15+5,ep-6]){rotate([0,90,0])cylinder(r=r_m5+0.5, h=100, $fn=50);}
-		
-
+	
 		translate([-5,10+44.55/2-15+long_605-5,6]){rotate([0,90,0])cylinder(r=r_m5, h=100, $fn=50);}
-		//translate([-5,10+44.55/2-15+long_605-5,6]){rotate([0,90,0])cylinder(r=r_m5+0.5, h=40, $fn=50);}
 		
-
 		translate([-5,10+44.55/2-15+long_605-5,ep-6]){rotate([0,90,0])cylinder(r=r_m5, h=100, $fn=50);}
-		//translate([31,10+44.55/2-15+long_605-5,ep-6]){rotate([0,90,0])cylinder(r=r_m5+0.5, h=100, $fn=50);}
 
 		//extrusions pour alléger les côtés de la pièce
 		hull(){
@@ -145,9 +144,6 @@ module double_extrudeur(){
 		translate([largeur/2+13,-epde+14,-5]){cylinder(r=r_m3, h=100, $fn=50);}
 		translate([largeur/2-13,-epde+14,0]){cylinder(r=ecrou_m3, h=13, $fn=6);}
 		translate([largeur/2+13,-epde+14,0]){cylinder(r=ecrou_m3, h=13, $fn=6);}
-
-		
-
 	}
 }
 
@@ -164,11 +160,20 @@ module support_605(){
 			translate([-5,15,ep_605+surep]){rotate([0,90,0])cylinder(r=2.5, h=ep+10, $fn=50);}
 			translate([-5,15,ep_605+5+surep]){rotate([0,90,0])cylinder(r=2.5, h=ep+10, $fn=50);}
 		}
+        
+        //exrusion pour passage colerette moteur
+        hull(){
+            translate([1,20,-5]){cylinder(r=2.5, h=ep+10, $fn=50);}
+            translate([1,10,-5]){cylinder(r=2.5, h=ep+10, $fn=50);}
+        }
+        
+        hull(){
+            translate([ep-1,20,-5]){cylinder(r=2.5, h=ep+10, $fn=50);}
+            translate([ep-1,10,-5]){cylinder(r=2.5, h=ep+10, $fn=50);}
+        }
 		
 
 		//extrusion pour libérer un peu le bloc
-		//translate([-5,long_605/2+6,ep_605-3+surep]){cube([ep+10,20,5]);}
-		//translate([-5,-5,ep_605-3+surep]){cube([ep+10,5+long_605/2-6,5]);}
 
 		//extrusion pour enlever un peu de largeur à la partie montante
 		translate([-0.1,0,ep_605-3+surep]){cube([1.1,30,5]);}
@@ -201,11 +206,9 @@ module support_605(){
 
 }
 
-
-
-double_extrudeur();
+//double_extrudeur();
 //translate([-surep,10+44.55/2-15,ep]){rotate([0,90,0])support_605();}
 //translate([largeur+surep,10+44.55/2-15,0]){rotate([0,-90,0])support_605();}
 
 //translate([100,0,0]){support_605();}
-//support_605();
+support_605();
