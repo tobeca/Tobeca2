@@ -10,9 +10,9 @@ module bridage_plateau(){
         
         //trous de montage sur le plateau
         translate([5,10,-5]){cylinder(r=2, h=30, $fn=50);}
-        translate([5,10,10]){rotate([0,0,30])cylinder(r=3.3, h=30, $fn=6);}
+        translate([5,10,6]){rotate([0,0,30])cylinder(r=3.3, h=30, $fn=6);}
         translate([28-5,10,-5]){cylinder(r=2, h=30, $fn=50);}
-        translate([28-5,10,10]){rotate([0,0,30])cylinder(r=3.3, h=30, $fn=6);}
+        translate([28-5,10,6]){rotate([0,0,30])cylinder(r=3.3, h=30, $fn=6);}
     }
     
 }

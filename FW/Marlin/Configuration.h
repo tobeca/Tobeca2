@@ -1,17 +1,21 @@
+#ifndef CONFIGURATION_H
+#define CONFIGURATION_H
+
+#include "boards.h"
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////PARAMETRES POUR TOBECA///////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #define CUSTOM_MENDEL_NAME "Tobeca" //Nom de l'imprimante qui s'affiche sur l'écran
-#define EXTRUDERS 2 //Nombre de têtes d'impression de votre imprimante
+#define EXTRUDERS 1 //Nombre de têtes d'impression de votre imprimante
 
 //PARAMETRES POUR LES THERMISTANCES
 //Choisir la valeur de TEMP_SENSOR en fonction de vos têtes
 //1 : Têtes d'impression Hexagon et E3DV6 (têtes métal)
 //5 : Tête d'impression J-HEAD MK5 (tête PEEK noire) - uniquement sur les anciennes versions de Tobeca
 #define TEMP_SENSOR_0 1 //Extrudeur n°1
-#define TEMP_SENSOR_1 1 //Extrudeur n°2 //mettre 0 dans le cas d'une imprimante à 1 seul extrudeur
+#define TEMP_SENSOR_1 0 //Extrudeur n°2 //mettre 0 dans le cas d'une imprimante à 1 seul extrudeur
 
 //PARAMETRES D'INERTIE DES TETES D'IMPRESSION
 //Choisir les paramètres d'inertie en fonction de votre tête d'impression. Prendre de préférence les valeurs à vide
@@ -30,8 +34,8 @@
 //PARAMETRES DE COURROIES
 //Il s'agit des pas/mm pour chaque axes dans l'ordre X, Y, Z et Extrudeurs.
 //Choisir les valeurs adaptées à votre imprimante ci dessous.
-//{80, 80, 4000,139.75} pour courroies noires GT2 souples (goomme + Nylon)
-//{64, 64, 4000,152} pour courroies blanches HTD3M rigides (PU + acier)
+//{80, 80, 4000,139.75} pour courroies noires GT2 souples (goomme + Nylon) -> ARCHIVE, NE PAS UTILISER
+//{67.5, 67.5, 4000,152} pour courroies HTD3M noires à partir du 01/10/2015
 #define DEFAULT_AXIS_STEPS_PER_UNIT   {67.5, 67.5, 4000,139.75}    
 
 //Ecran optionnel
@@ -41,18 +45,13 @@
 
 //Autolevelling du plateau d'impression
 //Encore en test, NE PAS ACTIVER
-#define ENABLE_AUTO_BED_LEVELING
+//#define ENABLE_AUTO_BED_LEVELING
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////FIN DES PARAMETRES POUR TOBECA///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#ifndef CONFIGURATION_H
-#define CONFIGURATION_H
-
-#include "boards.h"
 
 // This configuration file contains the basic settings.
 // Advanced settings can be found in Configuration_adv.h
