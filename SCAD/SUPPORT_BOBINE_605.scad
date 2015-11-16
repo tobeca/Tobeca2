@@ -9,7 +9,7 @@ module support_bobine(){
             
             hull(){
                 translate([0,2,5]){rotate([0,90,0])cylinder(h = largeur, r = 2, $fn=50);}
-                translate([0,longueur/2,14]){rotate([0,90,0])cylinder(h = largeur, r = 14, $fn=100);}
+                translate([0,longueur/2,14]){rotate([0,90,0])cylinder(h = largeur, r = 12, $fn=100);}
                 //translate([0,longueur/2+3,18]){rotate([0,90,0])cylinder(h = largeur, r = 5, $fn=50);}
                 translate([0,longueur-2,5]){rotate([0,90,0])cylinder(h = largeur, r = 2, $fn=50);}
             }

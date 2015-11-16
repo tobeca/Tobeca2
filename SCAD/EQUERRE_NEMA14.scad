@@ -52,9 +52,12 @@ module plaque_moteur(){
 			translate([nema-r_rond,r_rond,0]){cylinder(h = hauteur, r = r_rond, $fn=100);}
 		}
 
-		//trous pour le moteur
+		//trou pour le moteur
 		translate([nema/2,(nema+19)/2,-5]){cylinder(h = hauteur+20, r = r_centre, $fn=100);}
+        
+        //trous pour l'accouplement
         translate([nema/2,(nema+19)/2,8]){cylinder(h = hauteur+20, r = 15, $fn=100);}
+        translate([nema/2,(nema+19)/2,10]){cylinder(h = 11, r = 17, $fn=100);}
         
         //trou pour dégager serrage de l'accouplement
         hull(){
