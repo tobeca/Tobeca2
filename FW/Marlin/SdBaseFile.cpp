@@ -393,6 +393,7 @@ bool SdBaseFile::make83Name(const char* str, uint8_t* name, const char** ptr) {
       n = 10;  // max index for full 8.3 name
       i = 8;   // place for extension
     } else {
+      if (!(*str == '\0' && c==0X20)) {
       // illegal FAT characters
       PGM_P p = PSTR("|<>^+=?/[];,*\"\\");
       uint8_t b;
@@ -401,6 +402,7 @@ bool SdBaseFile::make83Name(const char* str, uint8_t* name, const char** ptr) {
       if (i > n || c < 0X21 || c > 0X7E)goto fail;
       // only upper case allowed in 8.3 names - convert lower to upper
       name[i++] = (c < 'a' || c > 'z') ?  (c) : (c + ('A' - 'a'));
+    }
     }
   }
   *ptr = str;

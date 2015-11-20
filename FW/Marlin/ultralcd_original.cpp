@@ -19,7 +19,6 @@ int absPreheatHotendTemp;
 int absPreheatHPBTemp;
 int absPreheatFanSpeed;
 
-
 #ifdef FILAMENT_LCD_DISPLAY
   unsigned long message_millis = 0;
 #endif
@@ -678,8 +677,6 @@ static void lcd_move_x() { _lcd_move(PSTR("X"), X_AXIS, X_MIN_POS, X_MAX_POS); }
 static void lcd_move_y() { _lcd_move(PSTR("Y"), Y_AXIS, Y_MIN_POS, Y_MAX_POS); }
 static void lcd_move_z() { _lcd_move(PSTR("Z"), Z_AXIS, Z_MIN_POS, Z_MAX_POS); }
 
-
-
 static void lcd_move_e()
 {
     if (encoderPosition != 0)
@@ -696,42 +693,10 @@ static void lcd_move_e()
     }
     if (lcdDrawUpdate)
     {
-        char *nume;
-        switch(active_extruder){
-          case 0: lcd_implementation_drawedit(PSTR("Extrudeur"), ftostr31(current_position[E_AXIS]));
-          break;
-          case 1: lcd_implementation_drawedit(PSTR("Extrudeur2"), ftostr31(current_position[E_AXIS]));
-
-          break;
-          case 2: lcd_implementation_drawedit(PSTR("Extrudeur3"), ftostr31(current_position[E_AXIS]));
-
-          break;
-          
-            break;
-          default:
-               lcd_implementation_drawedit(PSTR("Extrudeur"), ftostr31(current_position[E_AXIS]));
-            break;
-          }
+        lcd_implementation_drawedit(PSTR("Extruder"), ftostr31(current_position[E_AXIS]));
     }
     if (LCD_CLICKED) lcd_goto_menu(lcd_move_menu_axis);
 }
-
-static void lcd_move_e0()
-{
-		active_extruder=0;
-		lcd_move_e();
-}
-static void lcd_move_e1()
-{
-		active_extruder=1;
-		lcd_move_e();
-}
-static void lcd_move_e2()
-{
-		active_extruder=2;
-		lcd_move_e();
-}
-
 
 static void lcd_move_menu_axis()
 {
@@ -742,16 +707,7 @@ static void lcd_move_menu_axis()
     if (move_menu_scale < 10.0)
     {
         MENU_ITEM(submenu, MSG_MOVE_Z, lcd_move_z);
-	
-        MENU_ITEM(submenu, MSG_MOVE_E, lcd_move_e0);
-	   #if EXTRUDERS>1
-		MENU_ITEM(submenu, MSG_MOVE_E1, lcd_move_e1);
-	   #if EXTRUDERS>2
-		MENU_ITEM(submenu, MSG_MOVE_E2, lcd_move_e2);
-
-	   #endif
-
-	   #endif
+        MENU_ITEM(submenu, MSG_MOVE_E, lcd_move_e);
     }
     END_MENU();
 }
