@@ -13,13 +13,13 @@ dec=4.5;
 longueur=29;
 ep=3;
 hauteurf=8;
-r_rond=9;
+r_rond=1;
 tete_m3=3.5;
 
 module bloc_profile(){
 	difference(){
 	union()
-		cube([ep_bloc_base+3,l_bloc,hauteur]);
+		cube([ep_bloc_base+23.5,l_bloc+1,hauteur]);
 
 		//petite extrusion pour passage à l'intérieur du profilé
 		translate([-5,15,-5]){cube([10,25,hauteur+10]);}
@@ -29,14 +29,14 @@ module bloc_profile(){
 		translate([ep_bloc_base/2,16,-5]){cylinder(h=hauteur+10, r=r_arbre, $fn=50);}
 
 		//trou pour blocage de la vis
-		translate([5,16,hauteur/2]){rotate([0,89,0])cylinder(h=30, r=r_m3_for, $fn=50);}
+		translate([5,16,hauteur/2]){rotate([0,89,0])cylinder(h=50, r=r_m3_for, $fn=50);}
 
 		//cassage coin
 		//translate([10.4,0,-5]){rotate([0,0,-45])cube([7,9,hauteur+10]);}
 
 		//trou M3 de serrage sur les flancs de la Tobeca
 		translate([-5,7,hauteur/2+3]){rotate([0,90,0])cylinder(h=25, r=r_m3, $fn=50);}
-		translate([8,7,hauteur/2+3]){rotate([0,90,0])cylinder(h=25, r=r_ecrou_m3, $fn=6);}
+		translate([10,7,hauteur/2+3]){rotate([0,90,0])cylinder(h=50, r=r_ecrou_m3, $fn=6);}
 		
 	
 	}
