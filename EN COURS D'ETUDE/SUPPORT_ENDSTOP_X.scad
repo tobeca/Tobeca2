@@ -7,7 +7,7 @@ module endstop_x(){
     difference(){
         union(){
             translate([13,0,0]){cube([38.5,30,5]);}
-            translate([13,5,4]){cube([26,13,20]);}
+            translate([13,5,4]){cube([26,13,23]);}
         }
         
         //trou central d'arbre
