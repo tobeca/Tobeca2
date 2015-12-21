@@ -18,10 +18,10 @@ module support_bobine(){
         }
          //encastrement pour roulement
         hull(){
-         translate([largeur/2-4,longueur/2,15]){rotate([0,90,0])cylinder(h = 8, r = 9, $fn=100);}
-         translate([largeur/2-4,longueur/2,25]){rotate([0,90,0])cylinder(h = 8, r = 9, $fn=100);}
-         translate([largeur/2-4,longueur/2-5,16]){rotate([0,90,0])cylinder(h = 8, r = 9, $fn=100);}
-         translate([largeur/2-4,longueur/2+5,16]){rotate([0,90,0])cylinder(h = 8, r = 9, $fn=100);}
+         translate([largeur/2-3,longueur/2,15]){rotate([0,90,0])cylinder(h = 6, r = 9, $fn=100);}
+         translate([largeur/2-3,longueur/2,25]){rotate([0,90,0])cylinder(h = 6, r = 9, $fn=100);}
+         translate([largeur/2-3,longueur/2-5,16]){rotate([0,90,0])cylinder(h = 6, r = 9, $fn=100);}
+         translate([largeur/2-3,longueur/2+5,16]){rotate([0,90,0])cylinder(h = 6, r = 9, $fn=100);}
      }
          
          //trou pour vissage
