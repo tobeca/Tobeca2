@@ -1,7 +1,7 @@
 largeur=70;
 ep=25;
 hauteur=60;
-r_filament=1.2;
+r_filament=1.4;
 r_m3=2;
 ecrou_m3=3.2;
 ecart_pignon=4+1.1;

@@ -29,10 +29,10 @@ difference(){
 	translate([long-4-l_co/2,17,0]){cube([ l_co, l_gorge_collier, 9 ]);}
 
 	//passages pour colliers dessous
-	translate([4-l_co/2,1,0]){cube([ l_co, 16, l_gorge_collier*3 ]);}
-	translate([l_douille-4-l_co/2,1,0]){cube([ l_co, 16, l_gorge_collier*3 ]);}
-	translate([long-l_douille+4-l_co/2,1,0]){cube([ l_co, 18, l_gorge_collier*3 ]);}
-	translate([long-4-l_co/2,1,0]){cube([ l_co, 16, l_gorge_collier*3 ]);}
+	translate([4-l_co/2,1,0.5]){cube([ l_co, 16, l_gorge_collier*3 ]);}
+	translate([l_douille-4-l_co/2,1,0.5]){cube([ l_co, 16, l_gorge_collier*3 ]);}
+	translate([long-l_douille+4-l_co/2,1,0.5]){cube([ l_co, 18, l_gorge_collier*3 ]);}
+	translate([long-4-l_co/2,1,0.5]){cube([ l_co, 16, l_gorge_collier*3 ]);}
 
 	//cylindre pour passage douilles
 	translate([-0.1,9,13]){
