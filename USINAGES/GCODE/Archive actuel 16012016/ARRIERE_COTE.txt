@@ -1,0 +1,87 @@
+﻿#Fichier modèle pour les perçages
+#Il faut absolument respecter l'ordre suivant dans les modules : PARAMETRES, VARIABLES, INSTRUCTIONS
+
+PARAMETRES{
+	#Permet de stocker tous les paramètres de perçage/usinage qui serviront à la génération du GCODE
+	ep_matiere=27; #épaisseur de la pièce à percer en mm
+	marge_z=15; #marge Z au dessus de la pièce pour déplacements en mm
+	f_deplacement=300; #vitesse de déplacement des axes mm/min
+	f_descente=700; #vitesse du descente du forêt en mm/min
+	z_passe_percer=1; #nombre de passes pour perçage
+	off_x=3.5; #offset initial en X
+	off_y=-1.5; #offset initial en Y
+	accel=3000; #acceleration sur les déplacements
+	d_fraise=3; #diamètre de la fraise
+	z_passe_decouper=3; #nombre de passes pour l'usinage
+	f_decoupe=500; #vitesse de découpe
+	off_z=2; #offset initial en Z
+	f_centrage=200; #vitesse de centrage du foret
+}
+
+VARIABLES{
+	#Emplacement pour gérer directement des variables dans les instructions
+	hauteur=85;
+	longueur=396;
+	dec_grenouille=0.5;
+}
+
+INSTRUCTIONS{
+	#Positionnement des points de perçage percer, la première valeur est en X et la seconde est en Y.
+	#support arbre 1
+	trou([35,105]);
+	trou([35,127]);
+
+	#trous pour montage carter électrique
+	#trou([17,139]);
+	#trou([44,159]);
+
+	#trous pour retour de poulie Y
+	trou([66,173.5]);
+	trou([66,208.5]);
+
+	#trous pour montage carter électrique
+	#trou([44,223]);
+	#trou([17,243]);
+
+	#support arbre 2
+	trou([35,255]);
+	trou([35,277]);
+
+
+	#trou de blocage extrudeur
+	trou([97.5,286]);
+
+	#fermeture grenouille 1
+	trou([102,314]);
+	trou([73.5,327.5]);
+	trou([102,341]);
+
+	#trous de montage tranche boite
+	trou([130,438.5]);
+	trou([195,438.5]);
+
+	#trous de montage poignée
+	trou([200,326.5]);
+
+	#trous de montage flanc
+	trou([154,262]);
+	trou([154,170]);
+
+	#trous de montage poignée
+	trou([200,116.5]);
+
+
+	#fermeture grenouille 2
+	trou([102,82]);
+	trou([73.5,68.5]);
+	trou([102,55]);
+
+	#trou de blocage profilé
+	trou([161,58]);
+
+	#trous de montage tranche boite
+	trou([195,4.5]);
+	trou([130,4.5]);
+	trou([118,4.5]);
+	
+}

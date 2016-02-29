@@ -20,40 +20,49 @@ PARAMETRES{
 
 VARIABLES{
 	#Emplacement pour gérer directement des variables dans les instructions
-	d_bord=4.5;
-	longueur=443;
-	largeur=414;
+	decalage=110;
 }
 
 INSTRUCTIONS{
-	trou([126,4.5]);
-	trou([286,4.5]);
+	#Positionnement des points de perçage percer, la première valeur est en X et la seconde est en Y.
+	#trous planche droite
+	trou([212,55]);
+	trou([183.5,68.5]);
+	trou([212,82]);
 
-	#Trous de fixation du moteur
-	trou([198.5,14]);
-	trou([229.5,14]);
-	trou([229.5,45]);
-	trou([198.5,45]);
+	trou([145,105]);
+	trou([145,127]);
 
-	#Trous de fixation du boitier électronique
-	trou([190,87.5]);
-	trou([238,168.5]);
+	trou([176,173.5]);
+	trou([176,208.5]);
 
+	trou([145,255]);
+	trou([145,277]);
 
-	trou([largeur-4.5,145]);
+	trou([207.8,286]);
 
-	trou([largeur-4.5,300]);
+	trou([212,314]);
+	trou([183.5,327.5]);
+	trou([212,341]);
 
-	trou([286,longueur-4.5]);
-	trou([126,longueur-4.5]);
-	
-	#Trous de fixation de l'alimentation électrique
-	trou([234,403]);
-	trou([194,248]);
+	#trous planche gauche
+	trou([212-decalage,341]);
+	trou([183.5-decalage,327.5]);
+	trou([212-decalage,314]);
 
-	trou([4.5,300]);
-	trou([4.5,145]);
+	trou([207.8-decalage,286]);
 
+	trou([145-decalage,277]);
+	trou([145-decalage,255]);
 
+	trou([176-decalage,208.5]);
+	trou([176-decalage,173.5]);
+
+	trou([145-decalage,127]);
+	trou([145-decalage,105]);
+
+	trou([212-decalage,82]);
+	trou([183.5-decalage,68.5]);
+	trou([212-decalage,55]);
 	
 }

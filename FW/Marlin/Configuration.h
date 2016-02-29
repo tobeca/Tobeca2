@@ -35,8 +35,7 @@
 //Il s'agit des pas/mm pour chaque axes dans l'ordre X, Y, Z et Extrudeurs.
 //Choisir les valeurs adaptées à votre imprimante ci dessous.
 //{80, 80, 4000,139.75} pour courroies noires GT2 souples (goomme + Nylon) -> ARCHIVE, NE PAS UTILISER
-//{67.5, 67.5, 4000,152} pour courroies HTD3M noires à partir du 01/10/2015
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {67.5, 67.5, 4000,139.75}    
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {67.5, 67.5, 4000,139.75}    //courroies HTD3M noires en gomme depuis le 05/10/2015
 
 //Ecran optionnel
 //décommenter la ligne correspondante à votre écran et flasher la carte avec l'écran branché uniquement

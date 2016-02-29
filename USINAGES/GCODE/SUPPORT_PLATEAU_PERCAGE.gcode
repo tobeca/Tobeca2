@@ -25,6 +25,7 @@ G1 Z41.0 F3000 ; hauteur de déplacement Z, incluant son offset
 ; longueur=210
 ; x_dou=28
 ; y_dou=21
+M140 S100
 G1 F300
 G1 X8.5 Y8.5 F3000
 G1 F500
@@ -225,4 +226,5 @@ G1 F500
 G1 Z41.0 F3000
 M42 P7 S0 ; on arrête la fraise
 G1 Z40 
-G28 X0 Y0 ; on retourne au home mais on laisse le Z à sa dernière position
+M140 S0
+G1 X5 Y5 F3000

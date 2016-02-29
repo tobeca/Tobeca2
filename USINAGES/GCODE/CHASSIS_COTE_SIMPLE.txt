@@ -27,61 +27,22 @@ VARIABLES{
 
 INSTRUCTIONS{
 	#Positionnement des points de perçage percer, la première valeur est en X et la seconde est en Y.
-	#support arbre 1
-	trou([35,105]);
-	trou([35,127]);
+	#trous du bas
+	trou([55,4.5]);
+	trou([165,4.5]);
 
-	#trous pour montage carter électrique
-	trou([17,139]);
-	trou([44,159]);
-
-	#trous pour retour de poulie Y
-	trou([66,173.5]);
-	trou([66,208.5]);
-
-	#trous pour montage carter électrique
-	trou([44,223]);
-	trou([17,243]);
-
-	#support arbre 2
-	trou([35,255]);
-	trou([35,277]);
-
-
-	#trou de blocage extrudeur
-	trou([97.5,286]);
-
-	#fermeture grenouille 1
-	trou([102,314]);
-	trou([73.5,327.5]);
-	trou([102,341]);
-
-	#trous de montage tranche boite
-	trou([130,438.5]);
-	trou([195,438.5]);
-
-	#trous de montage poignée
-	trou([200,326.5]);
-
-	#trous de montage flanc
-	trou([154,262]);
-	trou([154,170]);
-
-	#trous de montage poignée
-	trou([200,116.5]);
-
-
-	#fermeture grenouille 2
-	trou([102,82]);
-	trou([73.5,68.5]);
-	trou([102,55]);
-
-	#trou de blocage profilé
+	#trous planche droite
 	trou([161,58]);
+	trou([154,170]);
+	trou([154,262]);
+	trou([165,438.5]);
 
-	#trous de montage tranche boite
-	trou([195,4.5]);
-	trou([130,4.5]);
-	trou([118,4.5]);
+	#trous planche gauche
+	trou([55,438.5]);
+	trou([44,262]);
+	trou([44,170]);
+	trou([51,58]);
+
+	
 	
 }

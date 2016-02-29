@@ -94,7 +94,7 @@ class Instructions: #les différentes fonctions d'instructions possibles pour us
 		h_travail = float(parametres.liste[0][1])+float(parametres.liste[1][1])+float(parametres.liste[11][1])
 		
 		filout.write('G1 Z'+str(h_travail)+' F'+parametres.liste[7][1]+' ; hauteur de déplacement Z, incluant son offset\n')
-		#filout.write('G1 X'+str(parametres.liste[5][1])+' Y'+str(parametres.liste[6][1])+' F'+parametres.liste[7][1]+' ; offset en X et Y\n')
+		filout.write('M140 S100 ; on demarre la fraise\n')
 		filout.write('\n')
 			
 	def trou(self,chaine,nb_var,parametres): #fonction pour percer un trou
@@ -265,9 +265,9 @@ while ligne != "": #lecture pour faire les instructions
 		instruction.rectangle(lignenette,nb_var,parametres)
 		
 #######FIN DU FICHIER#######
-filout.write('M42 P7 S0 ; on arrête la fraise\n') ########A VERIFIER SUR QUEL PIN ET COMMENT FAIRE CONTACT
 filout.write('G1 Z40 \n')
-filout.write('G28 X0 Y0 ; on retourne au home mais on laisse le Z à sa dernière position\n') #sauf Z qui reste à la même hauteur
+filout.write('M140 S0 ; on arrête la fraise\n')
+filout.write('G1 X5 Y5 F3000 ; on retourne au home mais on laisse le Z à sa dernière position\n') #sauf Z qui reste à la même hauteur
 #fermeture des fichiers
 filin.close()
 filout.close()

@@ -20,40 +20,33 @@ PARAMETRES{
 
 VARIABLES{
 	#Emplacement pour gérer directement des variables dans les instructions
-	d_bord=4.5;
-	longueur=443;
-	largeur=414;
+	hauteur=85;
+	longueur=396;
+	dec_grenouille=0.5;
 }
 
 INSTRUCTIONS{
-	trou([126,4.5]);
-	trou([286,4.5]);
+	#Positionnement des points de perçage percer, la première valeur est en X et la seconde est en Y.
+	#trous du bas
+	trou([55,4.5]);
+	trou([165,4.5]);
 
-	#Trous de fixation du moteur
-	trou([198.5,14]);
-	trou([229.5,14]);
-	trou([229.5,45]);
-	trou([198.5,45]);
+	#trous planche droite
+	trou([161,58]);
+	trou([200,116.5]);
+	trou([154,170]);
+	trou([154,262]);
+	trou([200,326.5]);
+	trou([165,438.5]);
 
-	#Trous de fixation du boitier électronique
-	trou([190,87.5]);
-	trou([238,168.5]);
+	#trous planche gauche
+	trou([55,438.5]);
+	trou([90,326.5]);
+	trou([44,262]);
+	trou([44,170]);
+	trou([90,116.5]);
+	trou([51,58]);
 
-
-	trou([largeur-4.5,145]);
-
-	trou([largeur-4.5,300]);
-
-	trou([286,longueur-4.5]);
-	trou([126,longueur-4.5]);
 	
-	#Trous de fixation de l'alimentation électrique
-	trou([234,403]);
-	trou([194,248]);
-
-	trou([4.5,300]);
-	trou([4.5,145]);
-
-
 	
 }
