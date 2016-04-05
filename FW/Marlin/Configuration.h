@@ -8,14 +8,14 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #define CUSTOM_MENDEL_NAME "Tobeca" //Nom de l'imprimante qui s'affiche sur l'écran
-#define EXTRUDERS 1 //Nombre de têtes d'impression de votre imprimante
+#define EXTRUDERS 2 //Nombre de têtes d'impression de votre imprimante
 
 //PARAMETRES POUR LES THERMISTANCES
 //Choisir la valeur de TEMP_SENSOR en fonction de vos têtes
 //1 : Têtes d'impression Hexagon et E3DV6 (têtes métal)
 //5 : Tête d'impression J-HEAD MK5 (tête PEEK noire) - uniquement sur les anciennes versions de Tobeca
 #define TEMP_SENSOR_0 1 //Extrudeur n°1
-#define TEMP_SENSOR_1 0 //Extrudeur n°2 //mettre 0 dans le cas d'une imprimante à 1 seul extrudeur
+#define TEMP_SENSOR_1 1 //Extrudeur n°2 //mettre 0 dans le cas d'une imprimante à 1 seul extrudeur
 
 //PARAMETRES D'INERTIE DES TETES D'IMPRESSION
 //Choisir les paramètres d'inertie en fonction de votre tête d'impression. Prendre de préférence les valeurs à vide
