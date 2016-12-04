@@ -1,4 +1,4 @@
-d1=14.5;
+d1=14.2;
 ep=2;
 d_fla=d1+ep*2+3;
 h_courroie=6;
