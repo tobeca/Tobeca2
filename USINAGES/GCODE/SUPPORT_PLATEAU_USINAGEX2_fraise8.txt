@@ -1,0 +1,66 @@
+﻿#Fichier modèle pour les perçages
+#Il faut absolument respecter l'ordre suivant dans les modules : PARAMETRES, VARIABLES, INSTRUCTIONS
+
+PARAMETRES{
+	#Permet de stocker tous les paramètres de perçage/usinage qui serviront à la génération du GCODE
+	ep_matiere=9; #épaisseur de la pièce à percer en mm
+	marge_z=12; #marge Z au dessus de la pièce pour déplacements en mm
+	f_deplacement=300; #vitesse de déplacement des axes mm/min
+	f_descente=500; #vitesse du descente du forêt en mm/min
+	z_passe_percer=1; #nombre de passes pour perçage
+	off_x=3.5; #offset initial en X 3.5
+	off_y=-1.5; #offset initial en Y -1.5
+	accel=3000; #acceleration sur les déplacements
+	d_fraise=8; #diamètre de la fraise
+	z_passe_decouper=3; #nombre de passes pour l'usinage
+	f_decoupe=350; #vitesse de découpe
+	off_z=20; #offset initial en Z
+	f_centrage=200; #vitesse de centrage du foret
+}
+
+VARIABLES{
+	#Emplacement pour gérer directement des variables dans les instructions
+	d_bord=5;
+	longueur=210;
+	x_dou=28;
+	y_dou=21;
+	offy=21.5;
+	
+}
+
+INSTRUCTIONS{
+
+	#Plateau bas : Ouverture base en usinage
+	rectangle([75,-5+offy,135,55+offy]);
+
+	#Plateau bas : Trous SC10UU droite bas
+	#trou([180+x_dou/2,30+y_dou+offy]);
+	#trou([180-x_dou/2,30+offy]);
+
+	#Plateau bas : Trous SC10UU gauche
+	#trou([30-x_dou/2,94.5+offy]);
+	#trou([30+x_dou/2,94.5+y_dou+offy]);
+
+	#Plateau bas : Trous SC10UU droite haut
+	#trou([180-x_dou/2,159+y_dou+offy]);
+	#trou([180+x_dou/2,159+offy]);
+
+	#Plateau haut et bas : Ouverture du milieu en usinage
+	rectangle([75,155+offy,135,265+offy]);
+
+	#Plateau haut : Trous SC10UU droite bas
+	#trou([180+x_dou/2,30+y_dou+longueur+offy]);
+	#trou([180-x_dou/2,30+longueur+offy]);
+
+	#Plateau haut : Trous SC10UU gauche
+	#trou([30-x_dou/2,94.5+longueur+offy]);
+	#trou([30+x_dou/2,94.5+y_dou+longueur+offy]);
+
+	#Plateau haut : Trous SC10UU droite haut
+	#trou([180-x_dou/2,159+y_dou+longueur+offy]);
+	#trou([180+x_dou/2,159+longueur+offy]);
+
+	#Plateau haut : Ouverture haute en usinage
+	rectangle([75,365+offy,135,425+offy]);
+	
+}
