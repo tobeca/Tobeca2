@@ -1,5 +1,5 @@
 ; Generation GCODE par OpenASCAM - Adrien Grelet - 2013
-; Generation fichier : Tue Oct 13 08:36:18 2015
+; Generation fichier : Thu Jan 19 16:51:59 2017
 
 ; ep_matiere=27
 ; marge_z=15
@@ -20,11 +20,11 @@ G28 ; home all axes
 G90 ; use absolute coordinates
 G1 F300 ; vitesse de déplacement des axes
 G1 Z44.0 F3000 ; hauteur de déplacement Z, incluant son offset
+M140 S100 ; on demarre la fraise
 
 ; d_bord=4.5
 ; longueur=443
 ; largeur=414
-M140 S100
 G1 F300
 G1 X129.5 Y3.0 F3000
 G1 F700
@@ -113,7 +113,6 @@ G1 F500
 G1 Z2.0 F700
 G1 F700
 G1 Z44.0 F3000
-M42 P7 S0 ; on arrête la fraise
 G1 Z40 
-M140 S0
-G1 X5 Y5 F3000
+M140 S0 ; on arrête la fraise
+G1 X5 Y5 F3000 ; on retourne au home mais on laisse le Z à sa dernière position
